@@ -1,0 +1,13 @@
+# Lo que este grupo usa además de requirements.txt (assignment, Puesta en marcha, punto 5).
+# En Colab lo instala la primera celda de cada notebook; en local:
+#     .venv/Scripts/python.exe -m pip install -r requirements.txt -r requirements-group.txt
+#
+# bm25s y PyStemmer ya están en requirements.txt. Usábamos bm25s 0.3.14: con la 0.3.11 del curso,
+# el top-100 de las 40 preguntas es idéntico (decision_log.md, «El repo del curso»).
+pandas>=2.2   # tablas de las notebooks; rango y no pin: Colab trae el suyo y google-colab depende de él
+tokenizers    # contamos tokens con el tokenizer de Qwen3; ya viene con transformers, se nombra porque se importa directo
+pytest>=8     # tests/ (solo local; en Colab no molesta)
+#
+# torch con CUDA en local (Etapa 3, embeddings en la GPU): no se fija acá porque Colab trae el suyo y fijarlo
+# lo reinstalaría. En el .venv se instaló a mano (decision_log.md, Etapa 3):
+#     .venv/Scripts/python.exe -m pip install "torch==2.14.1+cu130" --index-url https://download.pytorch.org/whl/cu130

@@ -21,3 +21,13 @@ __pycache__/
 
 # local build outputs
 _build/
+
+# --- Proyecto2_RAG ---
+# Fuente cruda del corpus: nunca en git (assignment §6.1)
+data/raw/
+
+# Secretos (tokens de GitHub / HF)
+.env
+
+# Notebooks de clase: material de consulta, no se versiona (tienen salidas; check_repo las rechaza)
+referencia/

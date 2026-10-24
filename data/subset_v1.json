@@ -1,0 +1,1262 @@
+{
+ "snapshot": "2026-10-24",
+ "source": "https://www.boe.es/datosabiertos/api/legislacion-consolidada",
+ "rule": {
+  "materias": {
+   "303": "Arrendamientos",
+   "305": "Arrendamientos urbanos",
+   "2476": "Desahucios",
+   "5774": "Propiedad Horizontal",
+   "7162": "Viviendas",
+   "7163": "Viviendas de Protección Oficial",
+   "7164": "Viviendas de Renta Limitada",
+   "7166": "Viviendas sociales",
+   "4118": "Impuesto sobre Viviendas Desocupadas",
+   "1720": "Cooperativas de viviendas"
+  },
+  "density_min": 0.45,
+  "density_regex": "vivienda|arrendamiento|arrendatari|arrendador|alquiler|desahucio|lanzamiento|inquilin|propiedad horizontal|comunidad de propietarios",
+  "estado_consolidacion": "Finalizado"
+ },
+ "norms": [
+  {
+   "id": "BOA-d-2009-90262",
+   "titulo": "Decreto-ley 1/2009, de 14 de abril, del Gobierno de Aragón, por el que se aprueba el Plan especial de dinamización del sector de la vivienda y se autoriza la prestación de avales por el Gobierno de Aragón",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20231226T153007Z"
+  },
+  {
+   "id": "BOA-d-2015-90619",
+   "titulo": "Decreto-ley 3/2015, de 15 de diciembre, del Gobierno de Aragón, de medidas urgentes de emergencia social en materia de prestaciones económicas de carácter social, pobreza energética y acceso a la vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20231226T153003Z"
+  },
+  {
+   "id": "BOA-d-2019-90366",
+   "titulo": "Decreto-ley 7/2019, de 12 de marzo, del Gobierno de Aragón, de medidas urgentes en materia de transporte de viajeros mediante el arrendamiento de vehículos con conductor.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20231226T153010Z"
+  },
+  {
+   "id": "BOE-A-1960-10906",
+   "titulo": "Ley 49/1960, de 21 de julio, sobre propiedad horizontal.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261005T085250Z"
+  },
+  {
+   "id": "BOE-A-1968-1060",
+   "titulo": "Decreto 2114/1968, de 24 de julio, por el que se aprueba el Reglamento para la aplicación de la Ley sobre Viviendas de Protección Oficial, texto refundido aprobado por Decretos 2131/1963, de 24 de julio, y 3964/1964, de 3 de diciembre.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Vivienda",
+   "fecha_actualizacion": "20260504T112754Z"
+  },
+  {
+   "id": "BOE-A-1968-909",
+   "titulo": "Ley 57/1968, de 27 de julio, sobre percibo de cantidades anticipadas en la construcción y venta de viviendas.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251216T103645Z"
+  },
+  {
+   "id": "BOE-A-1969-622",
+   "titulo": "Orden de 20 de mayo de 1969 por la que se aprueba la adaptación de las ordenanzas técnicas y normas constructivas, aprobadas por Ordenes de 12 de julio de 1955 y 22 de febrero de 1968 al texto refundido y revisado de la Legislación de Viviendas de Protección Oficial y su Reglamento.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Vivienda",
+   "fecha_actualizacion": "20251216T103634Z"
+  },
+  {
+   "id": "BOE-A-1970-527",
+   "titulo": "Orden de 4 de mayo de 1970 por la que se modifican las Ordenanzas Provisionales de Viviendas de Protección Oficial, aprobadas por la Orden de 20 de mayo de 1969.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Vivienda",
+   "fecha_actualizacion": "20251216T103649Z"
+  },
+  {
+   "id": "BOE-A-1972-351",
+   "titulo": "Decreto 469/1972, de 24 de febrero, sobre simplificación de trámites para expedición de la Cédula de Habitabilidad.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Vivienda",
+   "fecha_actualizacion": "20251216T110606Z"
+  },
+  {
+   "id": "BOE-A-1974-787",
+   "titulo": "Decreto 1306/1974, de 2 de mayo, por el que se regula la instalación en inmuebles de sistemas de distribución de la señal de televisión por cable.",
+   "ambito": "Estatal",
+   "departamento": "Presidencia del Gobierno",
+   "fecha_actualizacion": "20251216T110615Z"
+  },
+  {
+   "id": "BOE-A-1976-26183",
+   "titulo": "Real Decreto 2960/1976, de 12 de noviembre, por el que se aprueba el texto refundido de la Legislación de Viviendas de Protección Oficial.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Vivienda",
+   "fecha_actualizacion": "20251216T110627Z"
+  },
+  {
+   "id": "BOE-A-1977-8607",
+   "titulo": "Ley 24/1977, de 1 de abril, de expropiación forzosa por incumplimiento de la función social de la propiedad de viviendas de protección oficial construidas por el Ministerio de la Vivienda y los Organismos dependientes del mismo.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251216T110630Z"
+  },
+  {
+   "id": "BOE-A-1978-19845",
+   "titulo": "Real Decreto 1829/1978, de 15 de julio, por el cual se disponen determinadas obligaciones en la solicitud de la cédula de habitabilidad en edificaciones de nueva planta.",
+   "ambito": "Estatal",
+   "departamento": "Presidencia del Gobierno",
+   "fecha_actualizacion": "20251216T110636Z"
+  },
+  {
+   "id": "BOE-A-1978-27765",
+   "titulo": "Real Decreto-ley 31/1978, de 31 de octubre, sobre política de viviendas de protección oficial.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251216T110639Z"
+  },
+  {
+   "id": "BOE-A-1979-1217",
+   "titulo": "Real Decreto 3148/1978, de 10 de noviembre, por el que se desarrolla el Real Decreto-ley 31/1978, de 31 de octubre, sobre Política de Vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251216T121720Z"
+  },
+  {
+   "id": "BOE-A-1979-21590",
+   "titulo": "Real Decreto 2076/1979, de 20 de julio, por el que se establecen las condiciones que deben cumplir las viviendas que terminadas o en construcción opten por acogerse al régimen de viviendas de protección oficial establecido por el Real Decreto-ley 31/1978, de 31 de octubre.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251219T125229Z"
+  },
+  {
+   "id": "BOE-A-1979-3279",
+   "titulo": "Orden de 19 de enero de 1979 por la que se regula el cambio de régimen normativo de viviendas de protección oficial al amparo de lo dispuesto en las normas transitorias del Real Decreto 3148/1978, de 10 de noviembre.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251216T121728Z"
+  },
+  {
+   "id": "BOE-A-1979-3280",
+   "titulo": "Orden de 26 de enero de 1979 por la que se establecen las condiciones de pago del precio aplazado y la renta de las viviendas de promoción pública del Instituto Nacional de la Vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251216T121728Z"
+  },
+  {
+   "id": "BOE-A-1979-3281",
+   "titulo": "Orden de 26 de enero de 1979 por la que se establecen cláusulas de inclusión obligatoria en los contratos de compraventa y arrendamiento de viviendas de protección oficial de promoción privada, en cumplimiento de lo dispuesto en el artículo 13 del Real Decreto 3146/1978, de 10 de noviembre.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251216T121728Z"
+  },
+  {
+   "id": "BOE-A-1980-15958",
+   "titulo": "Ley 41/1980, de 5 de julio, de medidas urgentes de apoyo a la vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251216T123516Z"
+  },
+  {
+   "id": "BOE-A-1980-4552",
+   "titulo": "Real Decreto 355/1980, de 25 de enero, sobre reserva y situación de las viviendas de protección oficial destinadas a minusválidos.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas y Urbanismo",
+   "fecha_actualizacion": "20251216T123437Z"
+  },
+  {
+   "id": "BOE-A-1981-4585",
+   "titulo": "Real Decreto 248/1981, de 5 de febrero, sobre medidas de distribución de la reserva de viviendas destinadas a minusválidos, establecidas en el Real Decreto 355/1980, de 25 de enero.",
+   "ambito": "Estatal",
+   "departamento": "Presidencia del Gobierno",
+   "fecha_actualizacion": "20251216T165519Z"
+  },
+  {
+   "id": "BOE-A-1984-3139",
+   "titulo": "Ley 2/1984, de 9 de enero, sobre utilización de los inmuebles enajenados por el Instituto Catalán del Suelo para destinarlos a vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20260623T102011Z"
+  },
+  {
+   "id": "BOE-A-1988-13637",
+   "titulo": "Ley 3/1988, de 27 de abril, de creación del Instituto Gallego de la Vivienda y Suelo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Galicia",
+   "fecha_actualizacion": "20251217T171608Z"
+  },
+  {
+   "id": "BOE-A-1989-11181",
+   "titulo": "Real Decreto 515/1989, de 21 de abril, sobre protección de los consumidores en cuanto a la información a suministrar en la compra-venta y arrendamiento de viviendas.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Sanidad y Consumo",
+   "fecha_actualizacion": "20251217T175158Z"
+  },
+  {
+   "id": "BOE-A-1992-16412",
+   "titulo": "Ley 19/1992, de 7 de julio, sobre Régimen de Sociedades y Fondos de Inversión Inmobiliaria y sobre Fondos de Titulización Hipotecaria.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251217T193344Z"
+  },
+  {
+   "id": "BOE-A-1992-27351",
+   "titulo": "Ley 10/1992, de 4 de noviembre, de fianzas de arrendamientos y otros contratos.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20251217T193416Z"
+  },
+  {
+   "id": "BOE-A-1993-6501",
+   "titulo": "Ley 1/1993, de 14 de enero, de Reordenación de Funciones y Organización del Organismo Autónomo Instituto de la Vivienda de Madrid.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20251217T205108Z"
+  },
+  {
+   "id": "BOE-A-1994-26003",
+   "titulo": "Ley 29/1994, de 24 de noviembre, de Arrendamientos Urbanos.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261013T112227Z"
+  },
+  {
+   "id": "BOE-A-1994-28711",
+   "titulo": "Orden de 20 de diciembre de 1994 por la que se dictan normas para la elaboración del censo de contratos de arrendamiento de viviendas.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Obras Públicas, Transportes y Medio Ambiente",
+   "fecha_actualizacion": "20251217T212301Z"
+  },
+  {
+   "id": "BOE-A-1995-10634",
+   "titulo": "Ley 3/1995, de 15 de marzo, de Sanciones en Materia de Vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma del Principado de Asturias",
+   "fecha_actualizacion": "20251218T134349Z"
+  },
+  {
+   "id": "BOE-A-1995-12914",
+   "titulo": "Ley 15/1995, de 30 de mayo, sobre límites del dominio sobre inmuebles para eliminar barreras arquitectónicas a las personas con discapacidad.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251218T134400Z"
+  },
+  {
+   "id": "BOE-A-1995-13299",
+   "titulo": "Ley 5/1995, de 7 de abril, de condiciones de habitabilidad en edificios de viviendas y promoción de la accesibilidad general.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20251218T134402Z"
+  },
+  {
+   "id": "BOE-A-1996-5930",
+   "titulo": "Real Decreto 297/1996, de 23 de febrero, sobre inscripción en el Registro de la Propiedad de los Contratos de Arrendamientos Urbanos.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Justicia e Interior",
+   "fecha_actualizacion": "20251218T144059Z"
+  },
+  {
+   "id": "BOE-A-1997-19084",
+   "titulo": "Ley 6/1997, de 8 de enero, de Protección Pública a la Vivienda de la Comunidad de Madrid.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20261020T104147Z"
+  },
+  {
+   "id": "BOE-A-2001-12265",
+   "titulo": "Ley 3/2001, de 26 de abril, de la Calidad, Promoción y Acceso a la Vivienda de Extremadura.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251218T190511Z"
+  },
+  {
+   "id": "BOE-A-2002-16785",
+   "titulo": "Ley 6/2002, de 27 de junio, de medidas de apoyo en materia de autopromoción de viviendas, accesibilidad y suelo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251218T194127Z"
+  },
+  {
+   "id": "BOE-A-2003-10729",
+   "titulo": "Ley 9/2003, de 26 de marzo, del régimen sancionador en materia de viviendas protegidas de la Comunidad de Madrid.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20251218T200334Z"
+  },
+  {
+   "id": "BOE-A-2003-2905",
+   "titulo": "Ley 15/2002, de 27 de diciembre, de Medidas Presupuestarias, Administrativas y Fiscales.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma del Principado de Asturias",
+   "fecha_actualizacion": "20251218T200256Z"
+  },
+  {
+   "id": "BOE-A-2004-19752",
+   "titulo": "Ley 8/2004, de 20 de octubre, de la Vivienda de la Comunidad Valenciana.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Valenciana",
+   "fecha_actualizacion": "20260917T080530Z"
+  },
+  {
+   "id": "BOE-A-2004-20810",
+   "titulo": "Ley 2/2004, de 29 de octubre, de medidas urgentes en materia de suelo y vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma del Principado de Asturias",
+   "fecha_actualizacion": "20251218T204026Z"
+  },
+  {
+   "id": "BOE-A-2004-5194",
+   "titulo": "Ley 1/2004, de 19 de febrero, de creación de la Empresa Pública \"Gestión de Infraestructuras, Suelo y Vivienda de Extremadura\".",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251218T203919Z"
+  },
+  {
+   "id": "BOE-A-2004-889",
+   "titulo": "Ley 24/2003, de 26 de diciembre, de medidas urgentes de política de vivienda protegida.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20251218T203852Z"
+  },
+  {
+   "id": "BOE-A-2005-19004",
+   "titulo": "Ley 23/2005, de 18 de noviembre, de reformas en materia tributaria para el impulso a la productividad.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251218T210608Z"
+  },
+  {
+   "id": "BOE-A-2005-20662",
+   "titulo": "Ley 13/2005, de 11 de noviembre, de medidas para la vivienda protegida y el suelo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20260123T231002Z"
+  },
+  {
+   "id": "BOE-A-2005-21319",
+   "titulo": "Ley 11/2005, de 7 de diciembre, de medidas específicas y tributarias para las islas de Ibiza y Formentera, en materia de ordenación territorial, urbanismo y turismo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20251218T210621Z"
+  },
+  {
+   "id": "BOE-A-2006-20181",
+   "titulo": "Circular aeronáutica 3/2006, de 10 de noviembre, de la Dirección General de Aviación Civil, por la que se regula el arrendamiento de aeronaves entre compañías aéreas, sin inscripción en el Registro de Matrícula de Aeronaves.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251218T213610Z"
+  },
+  {
+   "id": "BOE-A-2006-5516",
+   "titulo": "Real Decreto 315/2006, de 17 de marzo, por el que se crea el Consejo para la Sostenibilidad, Innovación y Calidad de la Edificación.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda",
+   "fecha_actualizacion": "20251218T213456Z"
+  },
+  {
+   "id": "BOE-A-2007-19250",
+   "titulo": "Real Decreto 1472/2007, de 2 de noviembre, por el que se regula la renta básica de emancipación de los jóvenes.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda",
+   "fecha_actualizacion": "20251219T112108Z"
+  },
+  {
+   "id": "BOE-A-2007-2007",
+   "titulo": "Real Decreto 47/2007, de 19 de enero, por el que se aprueba el Procedimiento básico para la certificación de eficiencia energética de edificios de nueva construcción.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Presidencia",
+   "fecha_actualizacion": "20251219T111914Z"
+  },
+  {
+   "id": "BOE-A-2007-6609",
+   "titulo": "Ley 2/2007, de 1 de marzo, de Vivienda de la Comunidad Autónoma de La Rioja.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de La Rioja",
+   "fecha_actualizacion": "20260429T081417Z"
+  },
+  {
+   "id": "BOE-A-2008-10206",
+   "titulo": "Ley 5/2008, de 14 de mayo, de actuaciones urgentes destinadas a la obtención de suelo para viviendas de protección pública.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260720T062652Z"
+  },
+  {
+   "id": "BOE-A-2008-10444",
+   "titulo": "Orden VIV/1744/2008, de 9 de junio, por la que se regula el Registro General del Código Técnico de la Edificación.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda",
+   "fecha_actualizacion": "20251219T114546Z"
+  },
+  {
+   "id": "BOE-A-2008-19437",
+   "titulo": "Real Decreto 1975/2008, de 28 de noviembre, sobre las medidas urgentes a adoptar en materia económica, fiscal, de empleo y de acceso a la vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de la Presidencia",
+   "fecha_actualizacion": "20251219T114638Z"
+  },
+  {
+   "id": "BOE-A-2008-20751",
+   "titulo": "Real Decreto 2066/2008, de 12 de diciembre, por el que se regula el Plan Estatal de Vivienda y Rehabilitación 2009-2012.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda",
+   "fecha_actualizacion": "20251219T114648Z"
+  },
+  {
+   "id": "BOE-A-2008-20802",
+   "titulo": "Ley 4/2008, de 23 de diciembre, por la que se suprime el gravamen del Impuesto sobre el Patrimonio, se generaliza el sistema de devolución mensual en el Impuesto sobre el Valor Añadido, y se introducen otras modificaciones en la normativa tributaria.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T114649Z"
+  },
+  {
+   "id": "BOE-A-2009-10581",
+   "titulo": "Ley Foral 6/2009, de 5 de junio, de medidas urgentes en materia de urbanismo y vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20251219T120353Z"
+  },
+  {
+   "id": "BOE-A-2009-17000",
+   "titulo": "Ley 11/2009, de 26 de octubre, por la que se regulan las Sociedades Anónimas Cotizadas de Inversión en el Mercado Inmobiliario.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261007T103417Z"
+  },
+  {
+   "id": "BOE-A-2009-18733",
+   "titulo": "Ley 19/2009, de 23 de noviembre, de medidas de fomento y agilización procesal del alquiler y de la eficiencia energética de los edificios.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T120456Z"
+  },
+  {
+   "id": "BOE-A-2009-8275",
+   "titulo": "Ley 2/2009, de 19 de marzo, de rehabilitación y mejora de barrios de los municipios de las Illes Balears.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20251219T120343Z"
+  },
+  {
+   "id": "BOE-A-2009-9462",
+   "titulo": "Orden INT/1472/2009, de 28 de mayo, por la que se regula la cesión de uso de viviendas para el personal funcionario y laboral de Instituciones Penitenciarias.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio del Interior",
+   "fecha_actualizacion": "20251219T120350Z"
+  },
+  {
+   "id": "BOE-A-2010-14849",
+   "titulo": "Ley 9/2010, de 30 de agosto, del derecho a la vivienda de la Comunidad de Castilla y León.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Castilla y León",
+   "fecha_actualizacion": "20251219T123815Z"
+  },
+  {
+   "id": "BOE-A-2010-19282",
+   "titulo": "Orden INT/3215/2010, de 3 de diciembre, por la que se regula la comunicación del conductor habitual y del arrendatario a largo plazo al Registro de Vehículos.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio del Interior",
+   "fecha_actualizacion": "20251219T123839Z"
+  },
+  {
+   "id": "BOE-A-2010-19850",
+   "titulo": "Ley 11/2010, de 3 de diciembre, de medidas fiscales para la reducción del déficit público y para la sostenibilidad.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20251219T123843Z"
+  },
+  {
+   "id": "BOE-A-2010-5218",
+   "titulo": "Ley 1/2010, de 8 de marzo, Reguladora del Derecho a la Vivienda en Andalucía.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20260123T231002Z"
+  },
+  {
+   "id": "BOE-A-2010-598",
+   "titulo": "Ley 7/2009, de 17 de diciembre, de enajenación de viviendas de la Comunidad Autónoma de Extremadura.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251219T123617Z"
+  },
+  {
+   "id": "BOE-A-2010-8618",
+   "titulo": "Ley Foral 10/2010, de 10 de mayo, del Derecho a la Vivienda en Navarra.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20260728T115750Z"
+  },
+  {
+   "id": "BOE-A-2011-15937",
+   "titulo": "Ley 37/2011, de 10 de octubre, de medidas de agilización procesal.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T130708Z"
+  },
+  {
+   "id": "BOE-A-2012-11415",
+   "titulo": "Ley 8/2012, de 29 de junio, de vivienda de Galicia.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Galicia",
+   "fecha_actualizacion": "20260216T120716Z"
+  },
+  {
+   "id": "BOE-A-2012-14115",
+   "titulo": "Real Decreto-ley 27/2012, de 15 de noviembre, de medidas urgentes para reforzar la protección a los deudores hipotecarios.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T133043Z"
+  },
+  {
+   "id": "BOE-A-2012-15650",
+   "titulo": "Ley 16/2012, de 27 de diciembre, por la que se adoptan diversas medidas tributarias dirigidas a la consolidación de las finanzas públicas y al impulso de la actividad económica.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T133051Z"
+  },
+  {
+   "id": "BOE-A-2012-3394",
+   "titulo": "Real Decreto-ley 6/2012, de 9 de marzo, de medidas urgentes de protección de deudores hipotecarios sin recursos.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T132919Z"
+  },
+  {
+   "id": "BOE-A-2013-11497",
+   "titulo": "Ley 4/2013, de 1 de octubre, de medidas para asegurar el cumplimiento de la función social de la vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20260123T231003Z"
+  },
+  {
+   "id": "BOE-A-2013-1427",
+   "titulo": "Ley 5/2012, de 20 de diciembre, de Viviendas Rurales Sostenibles.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20251219T174348Z"
+  },
+  {
+   "id": "BOE-A-2013-3780",
+   "titulo": "Real Decreto 233/2013, de 5 de abril, por el que se regula el Plan Estatal de fomento del alquiler de viviendas, la rehabilitación edificatoria, y la regeneración y renovación urbanas, 2013-2016.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T174406Z"
+  },
+  {
+   "id": "BOE-A-2013-5073",
+   "titulo": "Ley 1/2013, de 14 de mayo, de medidas para reforzar la protección a los deudores hipotecarios, reestructuración de deuda y alquiler social.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T174421Z"
+  },
+  {
+   "id": "BOE-A-2013-5941",
+   "titulo": "Ley 4/2013, de 4 de junio, de medidas de flexibilización y fomento del mercado del alquiler de viviendas.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T174426Z"
+  },
+  {
+   "id": "BOE-A-2014-12560",
+   "titulo": "Orden FOM/2252/2014, de 28 de noviembre, por la que se determina la efectividad de las líneas de ayuda previstas en el Real Decreto 233/2013, de 5 de abril, por el que se regula el Plan Estatal de fomento del alquiler de viviendas, la rehabilitación edificatoria y la regeneración y renovación urbanas 2013-2016.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T181310Z"
+  },
+  {
+   "id": "BOE-A-2014-375",
+   "titulo": "Ley 10/2013, de 16 de diciembre, de medidas urgentes en materia de Vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Castilla y León",
+   "fecha_actualizacion": "20251219T181134Z"
+  },
+  {
+   "id": "BOE-A-2014-4890",
+   "titulo": "Resolución de 21 de abril de 2014, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 11 de abril de 2014, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco de los programas 1994 del Plan de Vivienda 1992-1995, el programa 1996 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T181210Z"
+  },
+  {
+   "id": "BOE-A-2014-7325",
+   "titulo": "Ley 2/2014, de 20 de junio, de modificación de la Ley 2/2003, de 30 de enero, de Vivienda de Canarias y de medidas para garantizar el derecho a la vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Canarias",
+   "fecha_actualizacion": "20251219T181230Z"
+  },
+  {
+   "id": "BOE-A-2014-9961",
+   "titulo": "Ley 7/2014, de 12 de septiembre, de Medidas sobre Rehabilitación, Regeneración y Renovación Urbana, y sobre Sostenibilidad, Coordinación y Simplificación en Materia de Urbanismo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Castilla y León",
+   "fecha_actualizacion": "20251219T181247Z"
+  },
+  {
+   "id": "BOE-A-2015-10727",
+   "titulo": "Ley 42/2015, de 5 de octubre, de reforma de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T183846Z"
+  },
+  {
+   "id": "BOE-A-2015-11723",
+   "titulo": "Real Decreto Legislativo 7/2015, de 30 de octubre, por el que se aprueba el texto refundido de la Ley de Suelo y Rehabilitación Urbana.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20261013T112419Z"
+  },
+  {
+   "id": "BOE-A-2015-4213",
+   "titulo": "Resolución de 6 de abril de 2015, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 13 de marzo de 2015, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del programa 1997 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T183741Z"
+  },
+  {
+   "id": "BOE-A-2015-4747",
+   "titulo": "Ley 6/2015, de 24 de marzo, de la Vivienda de la Región de Murcia.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20260714T074310Z"
+  },
+  {
+   "id": "BOE-A-2015-5744",
+   "titulo": "Ley 9/2015, de 25 de mayo, de medidas urgentes en materia concursal.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251219T183801Z"
+  },
+  {
+   "id": "BOE-A-2015-683",
+   "titulo": "Ley 5/2014, de 26 de diciembre, de Vivienda Protegida de Cantabria.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cantabria",
+   "fecha_actualizacion": "20251219T183713Z"
+  },
+  {
+   "id": "BOE-A-2015-7802",
+   "titulo": "Ley 3/2015, de 18 de junio, de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma del País Vasco",
+   "fecha_actualizacion": "20260120T094048Z"
+  },
+  {
+   "id": "BOE-A-2015-8275",
+   "titulo": "Ley 7/2015, de 30 de junio, de relaciones familiares en supuestos de separación o ruptura de los progenitores.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma del País Vasco",
+   "fecha_actualizacion": "20251219T183820Z"
+  },
+  {
+   "id": "BOE-A-2015-9206",
+   "titulo": "Ley 14/2015, de 21 de julio, del impuesto sobre las viviendas vacías, y de modificación de normas tributarias y de la Ley 3/2012.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20251219T183832Z"
+  },
+  {
+   "id": "BOE-A-2016-2579",
+   "titulo": "Resolución de 2 de marzo de 2016, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 26 de febrero de 2016, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco de los programas 1995 del Plan de Vivienda 1992-1995, el programa 1998 del Plan de Vivienda 1996-1999, Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T191816Z"
+  },
+  {
+   "id": "BOE-A-2016-478",
+   "titulo": "Ley 6/2015, de 28 de diciembre, de Medidas Fiscales y Administrativas.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cantabria",
+   "fecha_actualizacion": "20251219T191759Z"
+  },
+  {
+   "id": "BOE-A-2016-7692",
+   "titulo": "Ley 7/2016, de 21 de julio, de medidas extraordinarias contra la exclusión social.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251219T191843Z"
+  },
+  {
+   "id": "BOE-A-2017-10539",
+   "titulo": "Ley 6/2017, de 31 de julio, de modificación de la Ley 8/2012, de 19 de julio, del turismo de las Illes Balears, relativa a la comercialización de estancias turísticas en viviendas.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260112T110702Z"
+  },
+  {
+   "id": "BOE-A-2017-11003",
+   "titulo": "Decreto-ley 3/2017, de 4 de agosto, de modificación de la Ley 8/2012, de 19 de julio, del turismo de las Illes Balears, y de medidas para afrontar la emergencia en materia de vivienda en las Illes Balears.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260225T114118Z"
+  },
+  {
+   "id": "BOE-A-2017-13988",
+   "titulo": "Ley 9/2017, de 3 de julio, por la que se establece el mecanismo de naturaleza no tributaria compensatorio de la repercusión obligatoria del Impuesto sobre Bienes Inmuebles a los arrendatarios de viviendas de la Agencia de Vivienda Social de la Comunidad de Madrid y se adoptan medidas en materia de vivienda protegida.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20251219T194435Z"
+  },
+  {
+   "id": "BOE-A-2017-2421",
+   "titulo": "Ley 2/2017, de 3 de febrero, por la función social de la vivienda de la Comunitat Valenciana.",
+   "ambito": "Autonómico",
+   "departamento": "Comunitat Valenciana",
+   "fecha_actualizacion": "20260917T110657Z"
+  },
+  {
+   "id": "BOE-A-2017-3067",
+   "titulo": "Ley 2/2017, de 17 de febrero, de emergencia social de la vivienda de Extremadura.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251219T194340Z"
+  },
+  {
+   "id": "BOE-A-2017-490",
+   "titulo": "Ley 10/2016, de 1 de diciembre, de medidas de emergencia en relación con las prestaciones económicas del Sistema Público de Servicios Sociales y con el acceso a la vivienda en la Comunidad Autónoma de Aragón.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Aragón",
+   "fecha_actualizacion": "20260126T082304Z"
+  },
+  {
+   "id": "BOE-A-2017-5688",
+   "titulo": "Resolución de 28 de abril de 2017, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 31 de marzo de 2017, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del programa 1996 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251219T194400Z"
+  },
+  {
+   "id": "BOE-A-2018-11336",
+   "titulo": "Ley 8/2018, de 23 de julio, de ayudas de Lorca.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20261019T111800Z"
+  },
+  {
+   "id": "BOE-A-2018-13179",
+   "titulo": "Real Decreto-ley 13/2018, de 28 de septiembre, por el que se modifica la Ley 16/1987, de 30 de julio, de Ordenación de los Transportes Terrestres, en materia de arrendamiento de vehículos con conductor.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20260303T081926Z"
+  },
+  {
+   "id": "BOE-A-2018-17293",
+   "titulo": "Real Decreto-ley 21/2018, de 14 de diciembre, de medidas urgentes en materia de vivienda y alquiler.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251220T105320Z"
+  },
+  {
+   "id": "BOE-A-2018-3358",
+   "titulo": "Real Decreto 106/2018, de 9 de marzo, por el que se regula el Plan Estatal de Vivienda 2018-2021.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20260423T114941Z"
+  },
+  {
+   "id": "BOE-A-2018-6122",
+   "titulo": "Resolución de 23 de abril de 2018, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 13 de abril de 2018, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del programa 1993 del Plan de Vivienda 1992-1995, programa 1997 del Plan de Vivienda 1996-1999, Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251220T105226Z"
+  },
+  {
+   "id": "BOE-A-2018-9774",
+   "titulo": "Ley 5/2018, de 19 de junio, de la vivienda de las Illes Balears.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260717T104016Z"
+  },
+  {
+   "id": "BOE-A-2019-3108",
+   "titulo": "Real Decreto-ley 7/2019, de 1 de marzo, de medidas urgentes en materia de vivienda y alquiler.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261001T063543Z"
+  },
+  {
+   "id": "BOE-A-2019-4249",
+   "titulo": "Resolución de 20 de marzo de 2019, de la Secretaría de Estado de Infraestructuras, Transporte y Vivienda, por la que se publica el Acuerdo del Consejo de Ministros de 15 de marzo de 2019, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el Marco del Programa 1994 y 1995 del Plan de Vivienda 1992-1995, Programa 1998 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Fomento",
+   "fecha_actualizacion": "20251220T112029Z"
+  },
+  {
+   "id": "BOE-A-2019-7224",
+   "titulo": "Ley 11/2019, de 11 de abril, de promoción y acceso a la vivienda de Extremadura.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20251220T112051Z"
+  },
+  {
+   "id": "BOE-A-2019-750",
+   "titulo": "Ley Foral 28/2018, de 26 de diciembre, sobre el derecho subjetivo a la vivienda en Navarra.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20260317T090859Z"
+  },
+  {
+   "id": "BOE-A-2019-7839",
+   "titulo": "Ley 1/2019, de 22 de abril, de rehabilitación y de regeneración y renovación urbanas de Galicia.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Galicia",
+   "fecha_actualizacion": "20260216T130549Z"
+  },
+  {
+   "id": "BOE-A-2020-11363",
+   "titulo": "Ley 11/2020, de 18 de septiembre, de medidas urgentes en materia de contención de rentas en los contratos de arrendamiento de vivienda y de modificación de la Ley 18/2007, de la Ley 24/2015 y de la Ley 4/2016, relativas a la protección del derecho a la vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20251220T114227Z"
+  },
+  {
+   "id": "BOE-A-2020-12463",
+   "titulo": "Orden ICT/971/2020, de 15 de octubre, por la que se desarrolla el programa de renovación del parque circulante español en 2020 (Plan Renove 2020) y se modifica el Anexo II del Real Decreto-ley 25/2020, de 3 de julio, de medidas urgentes para apoyar la reactivación económica y el empleo.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Industria, Comercio y Turismo",
+   "fecha_actualizacion": "20251220T114241Z"
+  },
+  {
+   "id": "BOE-A-2020-14371",
+   "titulo": "Decreto-ley 34/2020, de 20 de octubre, de medidas urgentes de apoyo a la actividad económica desarrollada en locales de negocio arrendados.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20261020T113126Z"
+  },
+  {
+   "id": "BOE-A-2020-15870",
+   "titulo": "Real Decreto 1084/2020, de 9 de diciembre, por el que se modifica el Real Decreto 106/2018, de 9 de marzo, por el que se regula el Plan Estatal de Vivienda 2018-2021 y la Orden TMA/378/2020, de 30 de abril, por la que se definen los criterios y requisitos de los arrendatarios de vivienda habitual que pueden acceder a las ayudas transitorias de financiación establecidas en el artículo 9 del Real Decreto-ley 11/2020, de 31 de marzo, por el que se adoptan medidas urgentes complementarias en el ámbito social y económico para hacer frente al COVID-19.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T114248Z"
+  },
+  {
+   "id": "BOE-A-2020-16824",
+   "titulo": "Real Decreto-ley 37/2020, de 22 de diciembre, de medidas urgentes para hacer frente a las situaciones de vulnerabilidad social y económica en el ámbito de la vivienda y en materia de transportes.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20260302T092032Z"
+  },
+  {
+   "id": "BOE-A-2020-2509",
+   "titulo": "Decreto-ley 17/2019, de 23 de diciembre, de medidas urgentes para mejorar el acceso a la vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20260715T100157Z"
+  },
+  {
+   "id": "BOE-A-2020-4208",
+   "titulo": "Real Decreto-ley 11/2020, de 31 de marzo, por el que se adoptan medidas urgentes complementarias en el ámbito social y económico para hacer frente al COVID-19.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20260302T093400Z"
+  },
+  {
+   "id": "BOE-A-2020-4382",
+   "titulo": "Decreto-ley Foral 2/2020, de 25 de marzo, por el que se aprueban medidas urgentes para responder al impacto generado por la crisis sanitaria del coronavirus (COVID-19).",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20251220T114139Z"
+  },
+  {
+   "id": "BOE-A-2020-4412",
+   "titulo": "Orden TMA/336/2020, de 9 de abril, por la que se incorpora, sustituye y modifican sendos programas de ayuda del Plan Estatal de Vivienda 2018-2021, en cumplimiento de lo dispuesto en los artículos 10, 11 y 12 del Real Decreto-ley 11/2020, de 31 de marzo, por el que se adoptan medidas urgentes complementarias en el ámbito social y económico para hacer frente al COVID-19.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20260114T114256Z"
+  },
+  {
+   "id": "BOE-A-2020-4541",
+   "titulo": "Ley Foral 7/2020, de 6 de abril, por la que se aprueban medidas urgentes para responder al impacto generado por la crisis sanitaria del coronavirus (COVID-19).",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20251220T114140Z"
+  },
+  {
+   "id": "BOE-A-2020-4574",
+   "titulo": "Resolución de 7 de abril de 2020, de la Secretaría de Estado de Transportes, Movilidad y Agenda Urbana, por la que se publica el Acuerdo del Consejo de Ministros de 31 de marzo de 2020, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Programa 1996 del Plan de Vivienda 1996-1999, Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T114141Z"
+  },
+  {
+   "id": "BOE-A-2020-4759",
+   "titulo": "Orden TMA/378/2020, de 30 de abril, por la que se definen los criterios y requisitos de los arrendatarios de vivienda habitual que pueden acceder a las ayudas transitorias de financiación establecidas en el artículo 9 del Real Decreto-ley 11/2020, de 31 de marzo, por el que se adoptan medidas urgentes complementarias en el ámbito social y económico para hacer frente al COVID-19.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T114144Z"
+  },
+  {
+   "id": "BOE-A-2020-5020",
+   "titulo": "Decreto-ley 3/2020, de 28 de febrero, de medidas urgentes en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260223T114452Z"
+  },
+  {
+   "id": "BOE-A-2020-9589",
+   "titulo": "Decreto-ley 6/2020, de 5 de junio, para la ampliación de vivienda pública en la Comunitat Valenciana mediante los derechos de tanteo y retracto.",
+   "ambito": "Autonómico",
+   "departamento": "Comunitat Valenciana",
+   "fecha_actualizacion": "20251220T114233Z"
+  },
+  {
+   "id": "BOE-A-2021-10163",
+   "titulo": "Orden HAC/612/2021, de 16 de junio, por la que se aprueba el modelo 179, \"Declaración informativa trimestral de la cesión de uso de viviendas con fines turísticos\" y se establecen las condiciones y el procedimiento para su presentación.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Hacienda",
+   "fecha_actualizacion": "20251220T143947Z"
+  },
+  {
+   "id": "BOE-A-2021-11616",
+   "titulo": "Decreto-ley 4/2021, de 3 de mayo, para impulsar y agilizar la tramitación de ayudas y otras actuaciones en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260223T105846Z"
+  },
+  {
+   "id": "BOE-A-2021-11677",
+   "titulo": "Real Decreto-ley 15/2021, de 13 de julio, por el que se regula el arrendamiento de colecciones de bienes muebles integrantes del Patrimonio Histórico Español por determinadas entidades del sector público y se adoptan otras medidas urgentes en el ámbito cultural y deportivo.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251220T143957Z"
+  },
+  {
+   "id": "BOE-A-2021-16032",
+   "titulo": "Real Decreto 785/2021, de 7 de septiembre, sobre el control de la explotación de las autorizaciones de arrendamiento de vehículos con conductor.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T144007Z"
+  },
+  {
+   "id": "BOE-A-2021-16230",
+   "titulo": "Real Decreto-ley 19/2021, de 5 de octubre, de medidas urgentes para impulsar la actividad de rehabilitación edificatoria en el contexto del Plan de Recuperación, Transformación y Resiliencia.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251220T144020Z"
+  },
+  {
+   "id": "BOE-A-2021-16233",
+   "titulo": "Real Decreto 853/2021, de 5 de octubre, por el que se regulan los programas de ayuda en materia de rehabilitación residencial y vivienda social del Plan de Recuperación, Transformación y Resiliencia.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20260423T115815Z"
+  },
+  {
+   "id": "BOE-A-2021-19807",
+   "titulo": "Ley 3/2021, de 10 de noviembre, para impulsar y agilizar la tramitación de ayudas y otras actuaciones en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260112T102026Z"
+  },
+  {
+   "id": "BOE-A-2021-5396",
+   "titulo": "Resolución de 24 de marzo de 2021, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo de Consejo de Ministros de 23 de marzo de 2021, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Programa 1997 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T143917Z"
+  },
+  {
+   "id": "BOE-A-2021-7351",
+   "titulo": "Real Decreto-ley 8/2021, de 4 de mayo, por el que se adoptan medidas urgentes en el orden sanitario, social y jurisdiccional, a aplicar tras la finalización de la vigencia del estado de alarma declarado por el Real Decreto 926/2020, de 25 de octubre, por el que se declara el estado de alarma para contener la propagación de infecciones causadas por el SARS-CoV-2.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251220T143929Z"
+  },
+  {
+   "id": "BOE-A-2021-9560",
+   "titulo": "Real Decreto 401/2021, de 8 de junio, por el que se aprueban las medidas necesarias para que las comunidades autónomas puedan utilizar los recursos del Plan Estatal de Vivienda 2018-2021, a fin de hacer frente a las compensaciones que procedan, y por el que se establece el procedimiento para el reconocimiento de la compensación a los propietarios y arrendadores a que se refieren los artículos 1 y 1 bis del Real Decreto-ley 11/2020, de 31 de marzo, por el que se adoptan medidas urgentes complementarias en el ámbito social y económico para hacer frente al COVID-19.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20260302T093043Z"
+  },
+  {
+   "id": "BOE-A-2022-12940",
+   "titulo": "Ley Foral 20/2022, de 1 de julio, para el fomento de un parque de vivienda protegida y asequible en la Comunidad Foral de Navarra.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20260728T105253Z"
+  },
+  {
+   "id": "BOE-A-2022-18154",
+   "titulo": "Ley Foral 28/2022, de 11 de octubre, por la que se determinan los módulos aplicables a las actuaciones protegibles en materia de vivienda en Navarra para el año 2023.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20251220T151413Z"
+  },
+  {
+   "id": "BOE-A-2022-2708",
+   "titulo": "Decreto-ley 1/2022, de 11 de enero, por el que se establecen medidas extraordinarias para hacer frente al impacto sanitario, económico y social de la COVID-19 en el ámbito de las juntas de propietarios en las comunidades sujetas al régimen de propiedad horizontal.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20251220T151257Z"
+  },
+  {
+   "id": "BOE-A-2022-4979",
+   "titulo": "Decreto-ley 1/2022, de 20 de enero, por el que se adoptan medidas urgentes en materia urbanística y económica para la construcción o reconstrucción de viviendas habituales afectadas por la erupción volcánica en la isla de La Palma.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Canarias",
+   "fecha_actualizacion": "20251220T151308Z"
+  },
+  {
+   "id": "BOE-A-2022-5269",
+   "titulo": "Resolución de 30 de marzo de 2022, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo del Consejo de Ministros de 29 de marzo de 2022, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Programa 1998 del Plan de Vivienda 1996-1999, Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T151308Z"
+  },
+  {
+   "id": "BOE-A-2022-802",
+   "titulo": "Real Decreto 42/2022, de 18 de enero, por el que se regula el Bono Alquiler Joven y el Plan Estatal para el acceso a la vivienda 2022-2025.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20260423T120355Z"
+  },
+  {
+   "id": "BOE-A-2022-9838",
+   "titulo": "Ley 10/2022, de 14 de junio, de medidas urgentes para impulsar la actividad de rehabilitación edificatoria en el contexto del Plan de Recuperación, Transformación y Resiliencia.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20251220T151323Z"
+  },
+  {
+   "id": "BOE-A-2023-10130",
+   "titulo": "Resolución de 4 de abril de 2023, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo de Consejo de Ministros de 4 de abril de 2023, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Programa 1996 del Plan de Vivienda 1996-1999, del Plan de Vivienda 2002-2005 y del Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Transportes, Movilidad y Agenda Urbana",
+   "fecha_actualizacion": "20251220T163955Z"
+  },
+  {
+   "id": "BOE-A-2023-10134",
+   "titulo": "Ley 3/2023, de 13 de abril, de viviendas colaborativas de la Comunitat Valenciana.",
+   "ambito": "Autonómico",
+   "departamento": "Comunitat Valenciana",
+   "fecha_actualizacion": "20251220T163956Z"
+  },
+  {
+   "id": "BOE-A-2023-12203",
+   "titulo": "Ley 12/2023, de 24 de mayo, por el derecho a la vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261022T064629Z"
+  },
+  {
+   "id": "BOE-A-2023-24418",
+   "titulo": "Decreto-ley 6/2023, de 2 de octubre, de medidas urgentes en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260223T102101Z"
+  },
+  {
+   "id": "BOE-A-2024-14313",
+   "titulo": "Decreto-ley 2/2024, de 11 de marzo, por el que se adoptan medidas urgentes en materia de vivienda protegida para la recuperación económica y social de la isla de La Palma tras la erupción volcánica de Cumbre Vieja.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Canarias",
+   "fecha_actualizacion": "20251220T181303Z"
+  },
+  {
+   "id": "BOE-A-2024-15001",
+   "titulo": "Ley 3/2024, de 28 de junio, de medidas urbanísticas para la promoción de vivienda protegida.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20260728T102853Z"
+  },
+  {
+   "id": "BOE-A-2024-15575",
+   "titulo": "Ley 3/2024, de 3 de mayo, de medidas urgentes en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260717T101216Z"
+  },
+  {
+   "id": "BOE-A-2024-26685",
+   "titulo": "Resolución de 18 de diciembre de 2024, de la Presidencia del Instituto Nacional de Estadística, por la que se define el índice de referencia para la actualización anual de los contratos de arrendamiento de vivienda.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Economía, Comercio y Empresa",
+   "fecha_actualizacion": "20251220T181327Z"
+  },
+  {
+   "id": "BOE-A-2024-26931",
+   "titulo": "Real Decreto 1312/2024, de 23 de diciembre, por el que se regula el procedimiento de Registro Único de Arrendamientos y se crea la Ventanilla Única Digital de Arrendamientos para la recogida y el intercambio de datos relativos a los servicios de alquiler de alojamientos de corta duración.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260812T075107Z"
+  },
+  {
+   "id": "BOE-A-2024-281",
+   "titulo": "Decreto-ley 3/2023, de 7 de noviembre, de medidas urgentes sobre el régimen urbanístico de las viviendas de uso turístico.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Cataluña",
+   "fecha_actualizacion": "20260730T113630Z"
+  },
+  {
+   "id": "BOE-A-2024-7593",
+   "titulo": "Resolución de 10 de abril de 2024, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo del Consejo de Ministros de 26 de marzo de 2024, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Programa 1997 del Plan de Vivienda 1996-1999, Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260408T075632Z"
+  },
+  {
+   "id": "BOE-A-2025-10211",
+   "titulo": "Decreto-ley 3/2025, de 14 de marzo, de actuaciones urgentes destinadas a la obtención de suelo mediante proyectos residenciales estratégicos en el municipio de Palma.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260220T103404Z"
+  },
+  {
+   "id": "BOE-A-2025-12679",
+   "titulo": "Orden VAU/653/2025, de 19 de junio, por la que se determinan los plazos y el modelo para la transmisión por parte de las plataformas en línea de alquiler de corta duración de datos a la Ventanilla Única Digital de Arrendamientos, de acuerdo con el Real Decreto 1312/2024, de 23 de diciembre, por el que se regula el procedimiento de Registro Único de Arrendamientos y se crea la Ventanilla Única Digital de Arrendamientos para la recogida y el intercambio de datos relativos a los servicios de alquiler de alojamientos de corta duración.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260316T122503Z"
+  },
+  {
+   "id": "BOE-A-2025-22026",
+   "titulo": "Ley 4/2025, de 18 de julio, de actuaciones urgentes destinadas a la obtención de suelo mediante proyectos residenciales estratégicos en las Illes Balears.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de las Illes Balears",
+   "fecha_actualizacion": "20260717T121522Z"
+  },
+  {
+   "id": "BOE-A-2025-27116",
+   "titulo": "Orden VAU/1560/2025, de 22 de diciembre, por la que se aprueba el modelo informativo para cada categoría y tipo de arrendamientos sujetos al artículo 10.4 del Real Decreto 1312/2024, de 23 de diciembre, por el que se regula el procedimiento de Registro Único de Arrendamientos y se crea la Ventanilla Única Digital de Arrendamientos para la recogida y el intercambio de datos relativos a los servicios de alquiler de alojamientos de corta duración.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260316T133522Z"
+  },
+  {
+   "id": "BOE-A-2025-9152",
+   "titulo": "Resolución de 5 de mayo de 2025, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del programa 1998 del Plan de Vivienda 1996-1999, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260408T080417Z"
+  },
+  {
+   "id": "BOE-A-2026-16356",
+   "titulo": "Ley Foral 11/2026, de 2 de julio, reguladora del arrendamiento de habitaciones.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Foral de Navarra",
+   "fecha_actualizacion": "20260803T122225Z"
+  },
+  {
+   "id": "BOE-A-2026-16360",
+   "titulo": "Ley 2/2026, de 11 de junio, de medidas urgentes para el incremento de la Oferta de Vivienda con Protección Pública.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad de Madrid",
+   "fecha_actualizacion": "20260804T110417Z"
+  },
+  {
+   "id": "BOE-A-2026-19429",
+   "titulo": "Decreto-ley 4/2026, de 28 de julio, de actuaciones urgentes en materia de urbanismo para la agilización de la aprobación del planeamiento y su ejecución para el impulso a la promoción de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20260918T125701Z"
+  },
+  {
+   "id": "BOE-A-2026-20266",
+   "titulo": "Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261002T154351Z"
+  },
+  {
+   "id": "BOE-A-2026-20385",
+   "titulo": "Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261022T065023Z"
+  },
+  {
+   "id": "BOE-A-2026-20822",
+   "titulo": "Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261007T094756Z"
+  },
+  {
+   "id": "BOE-A-2026-20823",
+   "titulo": "Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20261007T123908Z"
+  },
+  {
+   "id": "BOE-A-2026-423",
+   "titulo": "Ley 5/2025, de 16 de diciembre, de Vivienda de Andalucía.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20260323T091811Z"
+  },
+  {
+   "id": "BOE-A-2026-6545",
+   "titulo": "Real Decreto-ley 8/2026, de 20 de marzo, de medidas en el alquiler en respuesta a las consecuencias económicas y sociales de la Guerra de Irán.",
+   "ambito": "Estatal",
+   "departamento": "Jefatura del Estado",
+   "fecha_actualizacion": "20260630T083524Z"
+  },
+  {
+   "id": "BOE-A-2026-7912",
+   "titulo": "Resolución de 6 de abril de 2026, de la Dirección General de Vivienda y Suelo, por la que se publica el Acuerdo de 31 de marzo de 2026, por el que se revisan y modifican los tipos de interés efectivos anuales vigentes para los préstamos cualificados o convenidos concedidos en el marco del Plan de Vivienda 1998-2001, Plan de Vivienda 2002-2005 y Plan de Vivienda 2005-2008.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20260408T084441Z"
+  },
+  {
+   "id": "BOE-A-2026-8872",
+   "titulo": "Real Decreto 326/2026, de 22 de abril, por el que se regula el Plan Estatal de Vivienda 2026-2030.",
+   "ambito": "Estatal",
+   "departamento": "Ministerio de Vivienda y Agenda Urbana",
+   "fecha_actualizacion": "20261022T110619Z"
+  },
+  {
+   "id": "BOJA-b-2025-90042",
+   "titulo": "Decreto-ley 1/2025, de 24 de febrero, de medidas urgentes en materia de vivienda.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Andalucía",
+   "fecha_actualizacion": "20260108T084043Z"
+  },
+  {
+   "id": "BORM-s-2020-90407",
+   "titulo": "Decreto-ley 10/2020, de 8 de octubre, por el que se establecen medidas de lucha contra la ocupación de las viviendas en la Región de Murcia y se modifica la Ley 2/2012, de 11 de mayo, y el Decreto Legislativo 1/1999, de 2 de diciembre, por el que se aprueba el texto refundido de la Ley de Hacienda de la Región de Murcia.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20260505T104602Z"
+  },
+  {
+   "id": "BORM-s-2025-90237",
+   "titulo": "Decreto-ley 3/2025, de 2 de octubre, de medidas urgentes en materia de vivienda y ordenación urbanística.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20251114T090938Z"
+  },
+  {
+   "id": "BORM-s-2026-90179",
+   "titulo": "Decreto-ley 3/2026, de 3 de julio, de \"Vivienda Asequible de la Región de Murcia\" y de medidas urgentes en materia urbanística.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de la Región de Murcia",
+   "fecha_actualizacion": "20260727T111012Z"
+  },
+  {
+   "id": "DOE-e-2005-90024",
+   "titulo": "Decreto Legislativo 1/2005, de 21 de junio, por el que se aprueba el Texto Articulado de las Bases establecidas por el artículo 5 de la Ley 10/2004, de 29 de diciembre, de Regulación y Bases de la Agencia Extremeña de la vivienda, el Urbanismo y el Territorio.",
+   "ambito": "Autonómico",
+   "departamento": "Comunidad Autónoma de Extremadura",
+   "fecha_actualizacion": "20241104T132934Z"
+  },
+  {
+   "id": "DOGV-r-2008-90027",
+   "titulo": "Decreto-ley 1/2008 de 27 de junio, del Consell, de medidas urgentes para el fomento de la vivienda y el suelo.",
+   "ambito": "Autonómico",
+   "departamento": "Comunitat Valenciana",
+   "fecha_actualizacion": "20231226T153118Z"
+  },
+  {
+   "id": "DOGV-r-2019-90405",
+   "titulo": "Decreto-ley 4/2019, de 29 de marzo, del Consell, de prestación del servicio de transporte público discrecional de personas viajeras mediante arrendamiento de vehículos con conductor.",
+   "ambito": "Autonómico",
+   "departamento": "Comunitat Valenciana",
+   "fecha_actualizacion": "20260605T121927Z"
+  }
+ ]
+}

@@ -63,10 +63,10 @@ CELL_MARKER = re.compile(r"^#\s*%%(.*)$")
 
 # --- Colab bootstrap: EDIT THESE when you publish (the only place they appear) ----------
 URL_PLACEHOLDER = "CHANGEME"
-REPO_URL = "https://github.com/solidgoldmagickarp/projecto_rag.git"
+REPO_URL = "https://github.com/facurie/Proyecto2_RAG.git"
 REPO_BRANCH = ""          # "" = the repository's default branch
-REPO_DIR = "projecto_rag"
-DRIVE_DIR = "projecto_rag"   # folder under MyDrive used when USE_DRIVE = True
+REPO_DIR = "Proyecto2_RAG"
+DRIVE_DIR = "Proyecto2_RAG"   # folder under MyDrive used when USE_DRIVE = True
 
 BOOTSTRAP_TEMPLATE = '''# --- Bootstrap de Colab (no hace nada fuera de Colab) --------------------------------
 # Colab arranca en /content con un entorno vacío: sin esta celda, el `import environment`
@@ -81,7 +81,7 @@ import sys
 # 12 h como máximo). Con USE_DRIVE = True, artifacts/ (documentos, embeddings, índices,
 # resultados, cachés del LLM) vive en cambio en tu Google Drive, y al volver a correr se
 # saltea todo lo que ya está construido.
-USE_DRIVE = False
+USE_DRIVE = True  # Proyecto2_RAG: desde la 02, cada etapa lee artefactos de una etapa anterior
 # Guardar también en Drive la caché de modelos de HuggingFace (~3 GB). Apagado por defecto:
 # volver a descargar suele ser más rápido que leer archivos grandes a través del montaje de Drive.
 MODELS_ON_DRIVE = False

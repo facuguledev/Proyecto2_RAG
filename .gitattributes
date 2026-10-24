@@ -1,6 +1,7 @@
 # Everything text is stored and checked out with LF, on every platform. The notebook
 # generator compares bytes (`--check`), so a CRLF checkout on Windows would make every
 # notebook look stale; .po / .jsonl / .md files are hashed downstream for the same reason.
+# Nuestro: eval/FROZEN.json guarda el sha256 de los BYTES de eval/*.jsonl; con CRLF no coincidiría en Colab.
 * text=auto eol=lf
 *.py      text eol=lf
 *.md      text eol=lf

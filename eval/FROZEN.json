@@ -1,0 +1,10 @@
+{
+ "files": {
+  "single_turn.jsonl": "17d8be8337c88d064137deb084eb79d49a39519ff9de275091b627e828af2a8b",
+  "dialogues.jsonl": "13f7c449d693a0d52c71683d82e153850dab0041e4d4e378469098f224913479",
+  "scenarios.jsonl": "9cfb5e7d1f66dbd51a0f53790499d26a08bd411b39d62bcb6dd582d4a867d281"
+ },
+ "corpus_sha": "b01a2c0acc3508873861365d25b37d28ea0a8dacf7f868834ddb5207e28b526d",
+ "key": "99676007c42e6f6e",
+ "frozen_at": "2026-10-24T14:30:24+00:00"
+}
