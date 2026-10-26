@@ -8,6 +8,10 @@
 
 **El código** está en el repo público https://github.com/facurie/Proyecto2_RAG: la primera celda de cada notebook lo clona e instala las dependencias en Colab.
 
+**Recalcular las tablas sin el corpus.** `python tools/recompute_tables.py`, desde la raíz del zip, recalcula las tablas de las Etapas 3-7 a partir de `eval/` y `artifacts/full/` solamente, con la biblioteca estándar: re-puntúa cada respuesta guardada con las mismas reglas y verifica los hashes del eval set congelado. Reproduce las tablas principales (aciertos por brazo, comparaciones con su test de signos y la calibración del juez); la primaria de la Etapa 3 necesita además `results/03_retrieval_metrics.jsonl`, que escribe la Etapa 8.
+
+**Revisión posterior a la entrega (2026-10-26).** Una revisión del trabajo encontró siete puntos en los que una afirmación se apoyaba en algo que no se midió, o que se midió con un instrumento que no correspondía. Los más importantes: la auditoría del juez y la de la memoria las hizo un modelo y no una persona (secciones 8 y 10), y la configuración elegida entrega versiones de artículos que no rigen en la fecha de la pregunta (secciones 4 y 5). Las correcciones están en el texto, cada una en su sección, y resumidas en la sección 11. Ninguna tabla de las Etapas 3-7 cambió de valor; la de la Etapa 5B ahora compara todos los brazos sobre los mismos turnos.
+
 ---
 
 ## 1 · Decisiones de diseño
@@ -226,7 +230,7 @@ Lo que más cambia es estructural (notas, versiones, texto citado), no de codifi
 
 #### Chequeo a libro cerrado
 
-`notebooks/00_closed_book.ipynb`: 5 preguntas sin recuperación, una por categoría más una posterior al corte. Corrida local del 2026-10-16 (modelo 63% en GPU): **0/5**, con 2 abstenciones y 3 alucinaciones seguras. Repetida el 2026-10-24 con el modelo 100% en GPU (Ollama 0.34.4): **1/5**. El resultado se mantiene con dos variantes de formato (schema sin la instrucción de sí/no, y texto libre).
+`00_closed_book.ipynb`: 5 preguntas sin recuperación, una por categoría más una posterior al corte. Corrida local del 2026-10-16 (modelo 63% en GPU): **0/5**, con 2 abstenciones y 3 alucinaciones seguras. Repetida el 2026-10-24 con el modelo 100% en GPU (Ollama 0.34.4): **1/5**. El resultado se mantiene con dos variantes de formato (schema sin la instrucción de sí/no, y texto libre).
 
 `qwen3:8b` no conoce ni los datos más difundidos de este corpus (prórroga de la LAU, fianza del art. 36, umbral de gran tenedor). Un eval set sobre este corpus mide recuperación, no recuerdo.
 
@@ -261,10 +265,12 @@ Ocho filas acumulativas, cada una con una sola variable de diferencia, todas con
 | +region | 25 | 22 | 19 | 5,0 | 235 | 0-0 |
 
 - **Qué pagó su costo.** Ninguna pieza supera p = 0,05. El prefijo contextual (título, sección y vigencia antepuestos al hijo) es la única que se acerca: 7 victorias y 1 derrota. RRF, reranker, padres y filtros quedan dentro del ruido. Por la regla pre-registrada (entre las filas que no se distinguen de la de más aciertos, gana la de menos piezas), **la mejor configuración es `+prefix`**, aunque `+date` tenga 19. Es la que usan las Etapas 4-6: RRF, reranker, padres y filtros quedan afuera.
+- **La elección se hizo sobre `test`.** `dev` tiene 8 preguntas con respuesta: con tan pocas, casi ninguna fila se distingue de otra, y la regla tiende a elegir la más simple. Elegir sobre los mismos datos en los que después se reporta es optimista; lo mitiga que la regla no elige la fila con más aciertos sino la más simple que no se distingue de ella. La Etapa 8 aplica la regla en `dev` y mide cuántas veces vuelve a elegir `+prefix` al remuestrear las 26 preguntas de `test`.
+- **Lo que la regla dejó afuera importa más que lo que dice la tabla.** La ficha del corpus dice que un índice que no respeta la vigencia "le entrega al generador una versión que ya no rige, o que todavía no rige", y `+prefix` hace exactamente eso: busca entre todas las versiones. Contado con las filas guardadas de la Etapa 3, por id de sección (sin la equivalencia por texto idéntico que usa la primaria), en las 7 preguntas `metadata` de test `+prefix` entrega el gold sin ninguna otra versión de su artículo en 1 (md06), el gold junto con otras versiones en 3 (md01, md02, md05) y otras versiones sin el gold en 3 (md03, md04, md07). `+date` entrega el gold y ninguna otra versión en 6 de las 7; en md03 no llega ninguna versión de su artículo. A md02 `+prefix` le entrega cinco versiones del art. 9 de la LAU; `+date`, solo la de febrero de 2019. En un corpus versionado, el filtro de vigencia es parte de la definición del documento, no una pieza que tenga que ganarse su lugar en una tabla de 26 preguntas. Lo que la regla de parsimonia no podía ver es que la tabla mide la clave entregada, no la versión equivocada entregada al lado.
 - **El movimiento más grande, abierto:** de BM25 a denso cambian 8 preguntas, 7 a favor del denso. En 4 de ellas BM25 no tiene la sección gold ni en su top 100: el usuario pregunta si puede "dejar el contrato" o quién arregla "la caldera", y la ley dice "desistimiento" y "reparaciones". BM25 cae en preámbulos de reales decretos-ley y en la Ley de Propiedad Horizontal por términos genéricos ("piso", "alquiler"); el denso encuentra los artículos de la LAU. **Gana por la razón que da su paper**, el desajuste de vocabulario entre la pregunta y el texto, pero no por ponerlo primero: el gold queda entre los puestos 1 y 15 del denso y llega por la entrega de 3.000 tokens. La única que pierde (md04) BM25 la pone segunda y el denso, 21.ª.
 - **Documento contra sección:** con `+prefix`, el documento correcto llega en 26 de 26, pero la sección en 17 y la clave desde el gold en 16. Lo que predice para la Etapa 4: el techo de la generación con recuperación es de unas 16 preguntas.
 - **Hijos contra padres, con tokens igualados:** empate (17 contra 17, 3-3). Los padres entregan la mitad de pasajes.
-- **El filtro de fecha** mueve 5-3 a favor (`topical` de 6 a 8, `metadata` de 5 a 6), sin superar el ruido. El de región no cambia nada.
+- **El filtro de fecha** mueve 5-3 a favor (`topical` de 6 a 8, `metadata` de 5 a 6), sin superar el ruido. El de región no cambia nada. La fila `+date` lo mide sobre `+parent` (con RRF, reranker y padres): la comparación de una variable contra la configuración elegida, `+prefix+date` contra `+prefix`, es la sección 1c de la Etapa 8.
 - **¿Puede la recuperación sola decir que la respuesta no está?** No. El coseno máximo de las preguntas fuera del corpus (media 0,67) no es menor que el de las que tienen respuesta (0,64), y el puntaje del reranker tampoco.
 - **La ventana del reranker:** 0 de 2.000 pares (consulta + hijo) pasan los 512 tokens.
 
@@ -278,7 +284,7 @@ Tres brazos sobre las mismas 30 preguntas, en orden fijo y con el modelo descarg
 | Recuperación (`+prefix`) | 18/30 | 15/26 | 3/4 | 0 |
 | Oráculo (secciones gold) | 25/30 | 22/26 | 3/4 | 0 |
 
-- **Recuperación contra libro cerrado:** 14-1 (p = 0,001; +43 puntos, IC +23 a +63). **Oráculo contra recuperación:** 7-0 (p = 0,016; +23 puntos, IC +10 a +40). El oráculo recibe menos tokens (1.086 contra 2.968): su ventaja mezcla "el pasaje correcto" con "menos distractores".
+- **Recuperación contra libro cerrado:** 14-1 (p = 0,001; +43 puntos, IC +23 a +63). **Oráculo contra recuperación:** 7-0 (p = 0,016; +23 puntos, IC +10 a +40). El oráculo recibe menos tokens (1.086 contra 2.968): su ventaja mezcla "el pasaje correcto" con "menos distractores". La Etapa 8 separa las dos cosas con un oráculo rellenado con distractores hasta los mismos 3.000 tokens (`oracle_padded`).
 - **Libro cerrado: 3 de 26.** Lejos del umbral de §7.4: el eval set mide recuperación, no preentrenamiento.
 - **La tabla 2×2** (fila de recuperación, 26 preguntas con respuesta):
 
@@ -287,11 +293,11 @@ Tres brazos sobre las mismas 30 preguntas, en orden fijo y con el modelo descarg
 | **recuperó bien** (clave desde el gold) | 13 | 3 |
 | **recuperó mal** | 2 | 8: 4 fieles al pasaje equivocado, 3 abstenciones, 1 sin apoyarse en lo entregado |
 
-- **Las fallas con el pasaje correcto a la vista son de razonamiento temporal.** En md02 y md05 llegaron dos versiones del mismo artículo y el modelo aplicó la siguiente a una fecha anterior a su vigencia: para un contrato de febrero de 2019, el texto "vigente desde marzo de 2019". La tercera (tp05) es correcta en sustancia, pero sin la palabra de la clave.
+- **Las fallas con el pasaje correcto a la vista son de razonamiento temporal, y también de recuperación.** En md02 y md05 llegaron dos versiones del mismo artículo y el modelo aplicó la siguiente a una fecha anterior a su vigencia: para un contrato de febrero de 2019, el texto "vigente desde marzo de 2019". El modelo lee mal los intervalos, pero la versión equivocada se la dio el sistema: con el filtro de fecha, a md02 y md05 les llega solo la versión de su fecha (sección 4). Si con eso aciertan lo mide la Etapa 8 (`retrieval_date`, la mejor fila más el filtro de fecha). La tercera falla (tp05) es correcta en sustancia, pero sin la palabra de la clave.
 - **Citas:** ningún brazo citó un bloque que no se le entregó (0 en 60 respuestas con pasajes). Con la respuesta en el contexto, se abstuvo 0 veces en recuperación y 1 en el oráculo.
 - **Un prompt demasiado grande:** 11.239 tokens con `num_ctx` 8.192. Con la guarda, `ContextOverflow` antes de mandar. Sin ella, el servidor evaluó 4.098 (la mitad de la ventana: los primeros tokens y la cola) y el modelo respondió con seguridad, sin la clave. Solo lo delató la comparación de nuestra cuenta con `prompt_eval_count`.
 - **Varianza:** 10 preguntas repetidas en frío, en otro orden y sin caché, cambiaron el texto en 7 casos y el puntaje en ninguno.
-- **Posición del pasaje:** no se midió (recortado; a esta escala un nulo no refutaría *Lost in the Middle*).
+- **Posición del pasaje:** no se midió en la entrega. La Etapa 8 la mide: el mismo conjunto de ~6.000 tokens con el gold primero, en el medio o último, sobre las 26 preguntas con respuesta. Dicho antes de correr: a esa escala un nulo no refuta *Lost in the Middle*, y para que el test de signos dé p < 0,05 hacen falta al menos 6 preguntas discordantes, todas para el mismo lado.
 
 ## 6 · Etapa 5 · La conversación
 
@@ -333,18 +339,20 @@ Por número de turno (doc@5 / sección@5):
 
 **Parte B · qué conservar.** Cada guion se reproduce solo, con su historial guionado. El total de pasajes + historial queda fijo en 1.500 tokens y el historial tiene un tope: lo que no usa pasa a los pasajes, así el total es el mismo en todos los brazos (la diferencia de `prompt_eval_count` entre brazos es de 46 tokens en promedio). Consulta: último turno, por la regla pre-registrada.
 
-| Brazo | Pierde el turno 1 (de 34) | Acierto | Clave desde gold | Llamadas por turno |
+| Brazo | Pierde el turno 1 (de 34) | Acierto (41 turnos comunes) | Clave desde gold | Llamadas por turno |
 |---|---|---|---|---|
-| ventana, tope 100 | 26 | 18/42 | 16/37 | 1,0 |
+| ventana, tope 100 | 26 | 18/41 | 16/37 | 1,0 |
 | ventana, tope 150 | 19 | 17/41 | 17/37 | 1,0 |
 | ventana, tope 250 | 7 | 20/41 | 17/37 | 1,0 |
-| resumen (MemGPT), tope 150 | — | 18/42 | 17/37 | 1,6 |
+| resumen (MemGPT), tope 150 | — | 18/41 | 17/37 | 1,6 |
 | buffer completo (referencia) | 0 | 19/41 | 17/37 | 1,0 |
+
+El acierto se cuenta sobre los 41 turnos que puntuaron en todos los brazos: dl04.t4 dio error en tres de ellos (abajo) y queda afuera de los cinco. En los dos brazos en que no dio error, falló, así que ningún conteo cambia; cambian los denominadores, que antes eran 41 o 42 según el brazo.
 
 - **El tope restringe de verdad, y el acierto casi no se mueve.** La mejor división fue el tope de 250 tokens de historial, con el resto de los 1.500 para pasajes (20/41), pero ninguna comparación supera el ruido (la mayor, 250 contra 150, es 3-0 por guion, p = 0,25). El turno 2 da 1/8 en todos los brazos: con el último turno como consulta, el pasaje que la correferencia necesita no llega, y conservar el turno 1 en el historial no lo trae. **A esta escala, con qué se busca pesa más que qué historial se guarda.**
 - **La sonda del resumen** (una pregunta derivada del turno 1, sin pasajes) sí muestra el mecanismo. Con el mismo tope de 150, la ventana recuerda el turno 1 en 1 de 7 guiones y el resumen en 3 de 7, sin tenerlo a la vista. Con el buffer completo, 7 de 7; sin historial, 0 de 7. Con 7 guiones no es evidencia (p = 0,625).
-- **La auditoría de los resúmenes** (25 actualizaciones, en las categorías de Wang et al.): 0 hechos inventados, 1 relación equivocada, 16 con detalles faltantes, 2 con texto corrupto (tokens en chino) y 6 correctas. Los faltantes tienen dos causas: el resumen **se congela en su tope de 220 caracteres** (30 de 58 lo tocaron) y repite el mismo texto cortado, o **reemplaza en lugar de fusionar** y pierde lo anterior (en dl01, la fecha de 2016). Lo que se probó es este resumen, con este tope.
-- **Costo, y si vale la pena:** el resumen cuesta 1,6 llamadas por turno contra 1,0, y 247 tokens de salida contra 214. A cambio da 1 acierto más que la ventana del mismo tope (18/42 contra 17/41) y recuerda más en la sonda (3 de 7 contra 1 de 7), las dos cosas dentro del ruido. A esta escala no paga su costo, y ninguna estrategia gana por encima del ruido como para justificar uno.
+- **La auditoría de los resúmenes** (25 actualizaciones, en las categorías de Wang et al.; hay una planilla ciega para que una persona la confirme, sección 10): 0 hechos inventados, 1 relación equivocada, 16 con detalles faltantes, 2 con texto corrupto (tokens en chino) y 6 correctas. Los faltantes tienen dos causas: el resumen **se congela en su tope de 220 caracteres** (30 de 58 lo tocaron) y repite el mismo texto cortado, o **reemplaza en lugar de fusionar** y pierde lo anterior (en dl01, la fecha de 2016). Lo que se probó es este resumen, con este tope.
+- **Costo, y si vale la pena:** el resumen cuesta 1,6 llamadas por turno contra 1,0, y 247 tokens de salida contra 214. A cambio da 1 acierto más que la ventana del mismo tope (18/41 contra 17/41) y recuerda más en la sonda (3 de 7 contra 1 de 7), las dos cosas dentro del ruido. **Este resumidor** no paga su costo. La conclusión es sobre un resumidor que se congela en su tope, no sobre la estrategia: la Etapa 8 prueba un resumidor v2, con el mismo tope de historial, que pide reescribir comprimiendo y no deja que la gramática corte el texto.
 - **Errores:** 3, los tres el mismo turno (dl04.t4): la respuesta llegó al tope de 1.200 caracteres y se contó como error de llamada.
 
 ## 7 · Etapa 6 · Memoria entre sesiones
@@ -365,11 +373,11 @@ Cinco brazos con el mismo prompt, los mismos pasajes y la misma pregunta; solo c
 | tokens de memoria por sonda | 0 | 847 | 550 | 404 | 404 |
 | clave en el espacio de memoria | 0/19 | 13/19 | 7/19 | 5/19 | 5/19 |
 
-- **Ninguna comparación supera el ruido.** Con 3 escenarios, el mejor resultado posible por escenario es 3-0 (p = 0,25). La dirección más clara es reproducción contra sin memoria, 5-2 por sonda.
+- **Ninguna comparación supera el ruido, y con este tamaño ninguna podía superarlo.** Con 3 escenarios de test, el mejor resultado posible por escenario es 3-0 (p = 0,25); por sonda, 22 sondas que no son independientes entre sí. La etapa quedó dimensionada para mostrar mecanismos, no efectos: lo que sigue son direcciones, y la limitación es del diseño (cuatro escenarios escritos a mano, uno en `dev`), no de la suerte. La dirección más clara es reproducción contra sin memoria, 5-2 por sonda (p = 0,45).
 - **La memoria gana en las actualizaciones de conocimiento** (2 → 4-5 de 6): es para lo que existe el camino de escritura. La reproducción ve los dos valores y no siempre elige el último. **La reproducción gana en la extracción y lo multi-sesión**, donde hace falta el dato literal: el almacén encuentra las sesiones con evidencia (25 de 31) pero la clave está en su espacio en 5 de 19. La extracción resume, y se pierde lo que se resume.
 - **La predicción de Mem0, a esta escala:** donde la reproducción entra, el almacén gana en costo (404 tokens de memoria contra 847) y no en exactitud (10 contra 11), dentro del ruido. El ahorro tiene un costo que la lectura no ve: 66 llamadas de escritura para los 3 escenarios de test, unos 2.100 tokens por sonda. Con el mismo presupuesto (600), almacén y reproducción empatan (10 contra 10).
 - **Una actualización de punta a punta** (sc01): "35 años" se guarda en la sesión 1; en la sesión 3 ("cumplí 36 el 8 de agosto") el UPDATE cierra el registro viejo (`valid_to`) y agrega el nuevo. La sonda del "antes" (15 de junio) ve 35 como vigente y la del "después" (octubre), 36.
-- **Qué guardó que no era cierto** (auditoría de los 76 registros; en test, 56): en test, 50 bien, 3 mal y 3 que nunca se dijeron. En el escenario de dev, 10 bien, 7 mal y 3 nunca dichos. Los errores tienen tres formas:
+- **Qué guardó que no era cierto** (auditoría de los 76 registros, hecha por un modelo, sección 10; en test, 56): en test, 50 bien, 3 mal y 3 que nunca se dijeron. En el escenario de dev, 10 bien, 7 mal y 3 nunca dichos. Los errores tienen tres formas:
   - **etiquetas equivocadas** que hacen que la regla de un valor vigente por *subject* cierre un dato verdadero: la ciudad de la usuaria guardada como la de la arrendadora;
   - **la fecha de la sesión tomada como dato** ("firmó el contrato el 11 de mayo de 2026");
   - **no-hechos** ("el usuario no especificó preferencia de citas") que **invalidan preferencias reales** dichas antes.
@@ -387,26 +395,26 @@ Dos jueces sobre las 407 respuestas de test de las Etapas 4-6: `qwen3:8b` (el mi
 - Entre ellos coinciden en 305 de 407, y granite acepta 97 respuestas que qwen rechaza, contra 5 al revés.
 - Ninguno da vuelta el orden de los brazos de ninguna etapa.
 
-**La calibración** (82 juicios, el 20%, muestreados con semilla y con los desacuerdos sobrerrepresentados; auditados sin ver los veredictos):
+**El auditor es un modelo, no una persona.** Los 82 juicios de la calibración (el 20%, muestreados con semilla y con los desacuerdos sobrerrepresentados) los auditó, sin ver los veredictos, un modelo de lenguaje más grande y de otra familia que los dos jueces. La consigna pide una persona. La tabla dice, entonces, qué instrumento se parece más a ese auditor, no cuál tiene razón:
 
-| Instrumento contra el auditor | Acuerdo en la muestra | Reponderado | Acepta lo que el auditor rechaza | Rechaza lo que el auditor acepta |
+| Instrumento contra el auditor-modelo | Acuerdo en la muestra | Reponderado | Acepta lo que el auditor rechaza | Rechaza lo que el auditor acepta |
 |---|---|---|---|---|
 | contención | 73/82 | 0,90 | 0 | 9 |
 | `granite3.3:8b` | 69/82 | 0,86 | 8 | 5 |
 | `qwen3:8b` | 42/82 | 0,75 | 4 | 36 |
 
-- **La contención es el instrumento más cercano al auditor,** y es conservadora: nunca acepta una respuesta incorrecta, y sus 9 desacuerdos son respuestas correctas dichas con otras palabras ("al día en el pago" por "al corriente"). Los números de las Etapas 4-6 son, entonces, una cota inferior.
-- **La autopreferencia esperada no aparece:** el juez de la misma familia que el generador es el más severo, no el más indulgente. Se sabe comparándolo con un segundo juez de otra familia sobre las mismas respuestas y con la auditoría: `qwen3:8b` rechaza 36 respuestas que el auditor acepta y acepta solo 4 que el auditor rechaza. Rechaza respuestas correctas que no repiten la clave literalmente.
-- **Ningún juez de 8B mejora a la contención como vara de este eval set.** Para respuestas abiertas, el de otra familia está más cerca del auditor que el de la misma.
+- **Lo que se sostiene sin el auditor.** Los dos jueces difieren entre sí más que cualquier brazo de cualquier etapa (305 de 407 iguales), y `qwen3:8b` es más severo que la contención y que `granite3.3:8b`. Eso sale de comparar instrumentos sobre las mismas respuestas, y no depende de quién auditó.
+- **Lo que depende del auditor.** Que la contención sea la vara más cercana a una lectura correcta (nunca aceptó una respuesta que el auditor rechazara; sus 9 desacuerdos son paráfrasis, como "al día en el pago" por "al corriente"), que por eso los números de las Etapas 4-6 sean una cota inferior, y que la autopreferencia no aparezca (`qwen3:8b` rechaza 36 respuestas que el auditor acepta). Las tres son plausibles, y las tres son hoy la lectura de un modelo.
+- **Cómo se cierra.** Las planillas para que una persona rehaga la auditoría están en el zip (`judge_human/audit.csv`, ciega, con las mismas 82 filas; instrucciones en `AUDITORIA_HUMANA.md`). La Etapa 8 recalcula esta tabla contra la persona y mide su acuerdo con el auditor-modelo.
 - **El framework (7b) no se hizo** (sección 10): no hay una comparación de lo que un framework decide por su cuenta.
 
 ## 9 · Lo que encontró el proyecto, más allá de las tablas
 
 - **Un corpus legal se mueve más rápido que un trabajo práctico.** En ocho días cambiaron 6 de 177 normas, y una foto ya traía una versión con vigencia futura que cambió el gold de una pregunta al mover el día de referencia. Fijar la foto por hash y verificar el eval set al cargar no fue burocracia: es lo que detectó el problema.
-- **El modelo lee mal la vigencia.** Con el pasaje correcto y la versión siguiente del mismo artículo a la vista, aplica la versión equivocada a una fecha. Recuperar la versión correcta (el filtro de fecha) no alcanza si el generador no razona sobre intervalos.
+- **El modelo lee mal la vigencia, y el sistema elegido le da con qué equivocarse.** Con el pasaje correcto y la versión siguiente del mismo artículo a la vista, aplica la versión equivocada a una fecha. La configuración elegida (`+prefix`, sin filtro de fecha) entrega versiones que no rigen en la fecha de la pregunta en 6 de las 7 preguntas `metadata` de test; con el filtro, en ninguna (sección 4). La lección es de diseño: en un corpus versionado, la vigencia es parte de la definición del documento (la ficha del corpus ya lo decía), y una regla de parsimonia sobre 26 preguntas no debería poder sacarla. Si con el filtro el modelo acierta lo mide la Etapa 8.
 - **En la conversación, el cuello de botella es buscar bien el turno dependiente.** Guardar más historial no recuperó lo que la consulta no encontró.
 - **Una memoria con "un valor vigente por *subject*" amplifica los errores del extractor:** un no-hecho o una etiqueta equivocada no solo agregan ruido, invalidan un dato verdadero. Y esos errores no los detecta ningún chequeo automático: hay que leer los registros.
-- **Los jueces de 8B no se pueden usar sin calibrar.** Los dos difieren entre sí más que cualquier brazo de cualquier etapa, y el de la misma familia que el generador es el más severo, no el más indulgente (sección 8). La contención, la vara más simple, fue la que más coincidió con el auditor.
+- **Los jueces de 8B no se pueden usar sin calibrar.** Los dos difieren entre sí más que cualquier brazo de cualquier etapa, y el de la misma familia que el generador es el más severo, no el más indulgente (sección 8). La contención, la vara más simple, fue la que más coincidió con el auditor; como el auditor también es un modelo, esa parte queda abierta hasta la auditoría humana.
 - **Temperatura 0 no es determinista,** pero a esta escala cambia la redacción, no el veredicto (7 de 10 textos, 0 de 10 puntajes).
 
 ## 10 · Prioridades, recortes y uso de IA
@@ -414,9 +422,29 @@ Dos jueces sobre las 407 respuestas de test de las Etapas 4-6: `qwen3:8b` (el mi
 **El plan contra lo que pasó.** El plan inicial era hacer las ocho etapas y recortar desde el final.
 - **Recortado:** 7b (reimplementar el loop en un framework), el experimento de posición del pasaje (Etapa 4) y el de §2.5. Las razones están en el registro.
 - **El filtro por memoria** (Etapa 6) primero se recortó y después se hizo, cuando la entrega se movió una semana y el filtro de la Etapa 3 ya existía.
-- **Dos cosas no estaban en el plan:** la foto se perdió y hubo que rehacer las Etapas 0-2 con una edición del eval set, y todas las corridas se hicieron en una sola máquina local (RTX 5070, Ollama 0.34.4, la misma versión que Colab).
-- **El presupuesto real fue menor que el estimado:** unas 1.420 llamadas al LLM y ~1,5 h de GPU para las Etapas 3-7, contra ~7-8 h de T4 estimadas.
+- **Dos cosas no estaban en el plan:** la foto se perdió y hubo que rehacer las Etapas 0-2 con una edición del eval set, y todas las corridas se hicieron en una sola máquina local (RTX 5070 Laptop de 8 GB, Ollama 0.34.4, la misma versión que Colab). Nada se corrió en Colab: que el pipeline corra en una T4 y que el build dé el mismo `corpus_sha` en otra máquina no está verificado.
+- **El presupuesto real fue mucho menor que el estimado:** unas 1.420 llamadas al LLM y ~1,5 h de GPU para las Etapas 3-7, contra ~7-8 h de T4 estimadas. Los recortes se decidieron con el presupuesto estimado y no se revisaron con el real: con la GPU que sobró alcanzaba para la posición del pasaje, que la Etapa 8 corre. Lo que más poder le faltaba al proyecto, más escenarios de memoria (sección 7), costaba sobre todo tiempo de escritura, no de GPU. §2.5 sigue afuera por memoria, no por tiempo: con `num_ctx = 20.480`, `qwen3:8b` necesita ~8,2 GB entre pesos y caché KV, y no entra entero en 8 GB.
+
+**El orden en el tiempo.** El repositorio tiene un solo commit (2026-10-24, el día antes de la entrega), así que no muestra por sí mismo que el eval set se congeló antes de los resultados. Lo muestran los artefactos: `eval/FROZEN.json` es de las 11:30 del 24 (hora de Buenos Aires) y la primera corrida de la Etapa 3 empezó a las 11:48 (`run_report.json`). Antes de esa hora, en la foto nueva, solo corrió el chequeo a libro cerrado de la Etapa 0 (11:10), cuyas 5 preguntas están en `dev` justamente porque se vieron sus salidas.
 
 **Uso de IA (§2.3).**
 - **Código.** Se usaron asistentes de código (Claude Code y Codex) para escribir el código de las etapas y sus tests, para revisarlo en busca de las trampas del enunciado antes de correr y para ejecutar las corridas.
 - **Consultas de decisión.** Algunas decisiones de diseño se discutieron con el asistente. Las decidió el grupo: el corpus y el plan, los recortes, correr todo en una máquina local y rehacer la foto.
+- **Auditorías.** La auditoría de los 82 juicios de la Etapa 7a y la de los 76 registros de memoria de la Etapa 6 las completó un modelo de lenguaje, no una persona (las dos planillas llevan el mismo auditor). La consigna pide que esa vara la ponga una persona, y es la falla metodológica más importante de la entrega: cada número de esas auditorías, y la calibración de los jueces, es hoy la lectura de un modelo. Las planillas ciegas para que una persona las rehaga, con las mismas filas, están en el zip, junto con las de los 25 resúmenes y las 20 reescrituras de la Etapa 5 (`AUDITORIA_HUMANA.md`); la Etapa 8 calcula el acuerdo persona-modelo cuando estén completas.
+- **El eval set.** Las preguntas, los guiones y los escenarios se escribieron con el método de la sección 3 (temas primero, la respuesta esperada antes de buscar, la clave copiada del gold), las de identificador las derivó código, y el grupo revisó el conjunto completo antes de congelarlo.
+
+## 11 · Revisión posterior a la entrega
+
+Lo que cambió en esta versión, y por qué. El detalle de cada punto está en `decision_log.md`, sección 6.
+
+| # | Lo que decía la entrega | Qué se corrigió | Dónde |
+|---|---|---|---|
+| 1 | La calibración era "contra el auditor", sin decir que era un modelo | Se dice; las conclusiones que dependen de él quedan marcadas; planillas ciegas para una persona | secciones 8 y 10, `AUDITORIA_HUMANA.md` |
+| 2 | "Recuperar la versión correcta no alcanza si el generador no razona sobre intervalos" (nunca se probó) | La configuración elegida entrega versiones que no rigen; el filtro de fecha las saca (medido con las filas guardadas). La generación con el filtro, en la Etapa 8 | secciones 4, 5 y 9 |
+| 3 | La mejor fila, elegida sobre `test` sin decirlo en el informe | Se dice, con su alcance; la Etapa 8 mide la regla en `dev` y su estabilidad | sección 4 |
+| 4 | Etapa 5B con denominadores distintos (41 y 42) | Todos los brazos sobre los mismos 41 turnos; ningún conteo cambia | sección 6 |
+| 5 | "El resumen no paga su costo" | Es este resumidor, que se congela en su tope; la Etapa 8 prueba un v2 con el mismo tope | sección 6 |
+| 6 | Etapa 6 "dentro del ruido" | Con 3 escenarios no había cómo salir del ruido: es una limitación del diseño, y se dice así | sección 7 |
+| 7 | Recortes justificados por costo, con 1,5 h usadas de 7-8 estimadas | Se dice que los recortes no se revisaron con el presupuesto real; la posición se corre en la Etapa 8 | sección 10 |
+
+**La Etapa 8** (`08_followups.ipynb`) mide lo que la revisión dejó abierto, sin tocar la configuración, el eval set congelado ni las filas guardadas: exporta las métricas por ítem de la Etapa 3 (para recalcular su primaria desde el zip), aplica la regla de la mejor fila en `dev`, agrega a la Etapa 4 un brazo con el filtro de fecha y un oráculo con los tokens igualados, mide la posición del pasaje y prueba el resumidor v2. Antes de generar, verifica que el pipeline reproduzca exactamente las entregas guardadas de las Etapas 3, 4 y 5. Su diseño y sus reglas de lectura quedaron escritos antes de correrla (`decision_log.md`, sección 6). Está probada de punta a punta con datos falsos (`tests/test_followups_dryrun.py`); sus resultados necesitan la GPU y el índice de la corrida original (~280 llamadas, unos 10 minutos), y se agregan a este informe cuando se corra.

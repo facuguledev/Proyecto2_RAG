@@ -51,6 +51,14 @@ REWRITE_NUM_PREDICT = 256
 # caracteres por token en los guiones), ~77 con su envoltorio y el margen.
 SUMMARY_MAX = 220
 SUMMARY_NUM_PREDICT = 256
+# El resumen v2 (Etapa 8). La auditoría de la Etapa 5 encontró que el de arriba se congela: al llegar a los 220
+# caracteres, el modelo vuelve a copiar el resumen anterior y la gramática lo corta antes de que entre lo nuevo
+# (30 de 58 actualizaciones). La v2 cambia solo el resumidor, con la misma estrategia y el mismo tope de
+# historial: la gramática deja de ser el límite (600 caracteres, que el modelo no alcanza escribiendo 35
+# palabras) y el prompt pide reescribir comprimiendo, sin copiar. Si el resumen sale largo, ocupa más del tope
+# y los mensajes recientes se recortan (``SummaryBuffer.view``): el costo queda adentro del mismo tope.
+SUMMARY_V2_GRAMMAR_MAX = 600
+SUMMARY_V2_TARGET = SUMMARY_MAX  # el largo que se le pide (35 palabras); pasarlo se cuenta, no se corta
 QUERY_TYPES = ("last_turn", "full_conversation", "rewrite", "oracle")
 
 
@@ -240,9 +248,9 @@ Reglas:
 - A lo sumo 35 palabras, en tercera persona ("el usuario...")."""
 
 
-def summary_messages(previous: str, evicted: list[dict]) -> list[dict]:
+def summary_messages(previous: str, evicted: list[dict], system: str = SUMMARY_SYSTEM) -> list[dict]:
     lines = "\n".join(f"{'Usuario' if m['role'] == 'user' else 'Asistente'}: {m['content']}" for m in evicted)
-    return [{"role": "system", "content": SUMMARY_SYSTEM},
+    return [{"role": "system", "content": system},
             {"role": "user", "content": f"<resumen_anterior>\n{previous or '(vacío)'}\n</resumen_anterior>\n\n"
                                         f"<mensajes>\n{lines}\n</mensajes>"}]
 
@@ -256,6 +264,33 @@ def summarize(previous: str, evicted: list[dict], *, model: str = grounded.MODEL
     try:
         out, r = llm.structured(summary_messages(previous, evicted), Summary, model=model, num_ctx=num_ctx,
                                 num_predict=SUMMARY_NUM_PREDICT)
+    except llm.ContextOverflow as error:
+        return None, {"error": f"CONTEXT_OVERFLOW (client): {error}", "model": model}
+    call = r.log()
+    if out is not None and not out.summary.strip():
+        return None, call | {"error": "SUMMARY_EMPTY: el resumen vino vacío"}
+    return (out.summary.strip() if out else None), call
+
+
+class SummaryV2(BaseModel):
+    # Como ``Summary``: sin campo de razonamiento. El tope de la gramática es una red, no el largo pedido.
+    summary: str = Field(max_length=SUMMARY_V2_GRAMMAR_MAX)
+
+
+SUMMARY_V2_SYSTEM = """Mantenés el resumen de una conversación entre un usuario y un asistente sobre legislación española de vivienda y alquiler. Recibís el resumen anterior (puede estar vacío) y los mensajes que salen de la ventana. Escribí el resumen nuevo, que reemplaza al anterior.
+
+Reglas:
+- Reescribí el resumen entero, juntando el anterior con los mensajes nuevos. Nunca copies el resumen anterior tal cual: lo nuevo tiene que entrar.
+- A lo sumo 35 palabras, en tercera persona ("el usuario..."). Para que entre, comprimí: primero sacá lo que ya se le respondió en turnos viejos y conservá siempre los datos que dio el usuario (fechas, lugar, tipo de contrato, montos, quién es el propietario).
+- No agregues nada que no esté en el resumen anterior o en los mensajes: ni suposiciones ni opiniones."""
+
+
+def summarize_v2(previous: str, evicted: list[dict], *, model: str = grounded.MODEL,
+                 num_ctx: int = grounded.NUM_CTX) -> tuple[str | None, dict]:
+    """Como ``summarize``, con el prompt y el schema de la v2."""
+    try:
+        out, r = llm.structured(summary_messages(previous, evicted, SUMMARY_V2_SYSTEM), SummaryV2, model=model,
+                                num_ctx=num_ctx, num_predict=SUMMARY_NUM_PREDICT)
     except llm.ContextOverflow as error:
         return None, {"error": f"CONTEXT_OVERFLOW (client): {error}", "model": model}
     call = r.log()
@@ -285,8 +320,10 @@ class SummaryBuffer:
     """
 
     def __init__(self, cap: int, count: Callable[[str], int], summarizer: Summarizer,
-                 trigger: float = SUMMARY_TRIGGER):
+                 trigger: float = SUMMARY_TRIGGER, max_chars: int = SUMMARY_MAX, target_chars: int | None = None):
         self.cap, self.count, self.summarizer, self.trigger = cap, count, summarizer, trigger
+        self.max_chars = max_chars  # el tope de la gramática del resumidor: llegar ahí es un corte
+        self.target_chars = target_chars  # el largo pedido, si es menor que el tope: pasarlo se cuenta aparte
         self.summary = ""
         self.recent: list[dict] = []
         self.updates: list[dict] = []
@@ -307,8 +344,12 @@ class SummaryBuffer:
             evicted, self.recent = self.recent[:n_out], self.recent[n_out:]
             new, call = self.summarizer(self.summary, evicted)
             calls.append(call)
-            self.updates.append({"before": self.summary, "evicted": evicted, "after": new, "error": call.get("error"),
-                                 "at_maxlength": new is not None and len(new) >= SUMMARY_MAX})
+            update = {"before": self.summary, "evicted": evicted, "after": new, "error": call.get("error"),
+                      "at_maxlength": new is not None and len(new) >= self.max_chars}
+            if self.target_chars is not None:  # solo la v2: las filas de la Etapa 5 quedan como estaban
+                update["over_target"] = new is not None and len(new) > self.target_chars
+                update["copied_previous"] = new is not None and bool(self.summary) and new == self.summary
+            self.updates.append(update)
             if new is not None:
                 self.summary = new
             # Si la llamada falló, el resumen anterior queda y lo desalojado se pierde: queda contado como
@@ -340,11 +381,17 @@ COMPARISONS = (("window_h100", "window_h150"), ("window_h150", "window_h250"), (
 REFERENCE = "full_buffer"
 
 
+# La v2 del resumen (Etapa 8): misma estrategia y mismo tope, otro resumidor. Va aparte de ``ARMS`` para que la
+# especificación de la Etapa 5 (que lleva ``vars`` de cada brazo) no cambie.
+SUMMARY_V2_ARM = HistoryArm(f"summary_v2_h{COMPRESSION_CAP}", "summary_v2", COMPRESSION_CAP)
+
+
 class HistoryState:
     """El historial de un brazo a lo largo de UN guion: todo lo guionado y lo que el brazo ve.
 
     - ``window``: los mensajes más nuevos que entran en el tope;
     - ``summary``: ``SummaryBuffer`` con el tope;
+    - ``summary_v2``: ``SummaryBuffer`` con el tope y el resumidor v2 (``summarize_v2``);
     - ``full``: todo, sin tope. Si el prompt no entra en ``num_ctx − num_predict``, ``grounded.generate`` lo
       registra como overflow (un error de llamada, no una respuesta).
     """
@@ -353,13 +400,15 @@ class HistoryState:
         self.arm, self.count = arm, count
         self.messages: list[dict] = []
         self.buffer = None
-        if arm.strategy == "summary":
+        if arm.strategy in ("summary", "summary_v2"):
             if summarizer is None or arm.cap is None:
-                raise RuntimeError("strategy=summary necesita un summarizer y un tope")
-            self.buffer = SummaryBuffer(arm.cap, count, summarizer)
+                raise RuntimeError(f"strategy={arm.strategy} necesita un summarizer y un tope")
+            self.buffer = (SummaryBuffer(arm.cap, count, summarizer) if arm.strategy == "summary" else
+                           SummaryBuffer(arm.cap, count, summarizer, max_chars=SUMMARY_V2_GRAMMAR_MAX,
+                                         target_chars=SUMMARY_V2_TARGET))
         elif arm.strategy == "window" and arm.cap is None:
             raise RuntimeError("strategy=window necesita un tope")
-        elif arm.strategy not in ("window", "full", "summary"):
+        elif arm.strategy not in ("window", "full"):
             raise ValueError(f"estrategia desconocida: {arm.strategy}")
 
     def add(self, exchange: list[dict]) -> list[dict]:

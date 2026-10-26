@@ -380,7 +380,7 @@ for cell in ["recuperó bien · respondió mal", "recuperó mal · fiel al pasaj
 # %% [markdown]
 r"""
 **Lectura.** De las 16 preguntas en las que llegó la clave desde el gold, **13 se respondieron bien**. Las 3 fallas son de dos tipos:
-- **La versión equivocada (md02, md05).** El pasaje correcto estaba, junto con la versión siguiente del mismo artículo, y el modelo aplicó la siguiente a una fecha anterior a su vigencia: para un contrato de febrero de 2019 usó el texto "vigente desde marzo de 2019"; para marzo de 2023, el de junio. Leer intervalos de vigencia es una tarea de razonamiento temporal que el modelo hace mal, no un problema de recuperación.
+- **La versión equivocada (md02, md05).** El pasaje correcto estaba, junto con la versión siguiente del mismo artículo, y el modelo aplicó la siguiente a una fecha anterior a su vigencia: para un contrato de febrero de 2019 usó el texto "vigente desde marzo de 2019"; para marzo de 2023, el de junio. Leer intervalos de vigencia es una tarea de razonamiento temporal que el modelo hace mal. Pero también es un problema de recuperación: la configuración elegida no filtra por fecha y le entregó una versión que no regía en la fecha de la pregunta. Con el filtro (fila `+date` de la Etapa 3) a md02 y md05 les llega solo la versión de su fecha; si con eso aciertan lo mide la Etapa 8 (`retrieval_date`).
 - **Una paráfrasis (tp05).** La respuesta es correcta en sustancia ("le toca al casero arreglarla") pero no usa la palabra de la clave ("reparaciones"). Es un falso negativo de la contención: lo lee el juez de la Etapa 7.
 
 Cuando la clave no llegó (10 preguntas): 3 abstenciones, 4 respuestas fieles a un pasaje equivocado, 1 sin apoyarse en lo entregado y 2 aciertos igual.

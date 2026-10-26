@@ -56,6 +56,7 @@ STAGE_STEMS = (
     "05_conversation",
     "06_memory",
     "07_second_read",
+    "08_followups",
 )
 STAGES: dict[str, tuple[Path, Path]] = {s: (ROOT / f"{s}.py", ROOT / f"{s}.ipynb") for s in STAGE_STEMS}
 

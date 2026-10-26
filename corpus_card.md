@@ -173,6 +173,6 @@ Lo que más cambia es estructural (notas, versiones, texto citado), no de codifi
 
 ## Chequeo a libro cerrado
 
-`notebooks/00_closed_book.ipynb`: 5 preguntas sin recuperación, una por categoría más una posterior al corte. Corrida local del 2026-10-16 (modelo 63% en GPU): **0/5**, con 2 abstenciones y 3 alucinaciones seguras. Repetida el 2026-10-24 con el modelo 100% en GPU (Ollama 0.34.4): **1/5**. El resultado se mantiene con dos variantes de formato (schema sin la instrucción de sí/no, y texto libre).
+`00_closed_book.ipynb`: 5 preguntas sin recuperación, una por categoría más una posterior al corte. Corrida local del 2026-10-16 (modelo 63% en GPU): **0/5**, con 2 abstenciones y 3 alucinaciones seguras. Repetida el 2026-10-24 con el modelo 100% en GPU (Ollama 0.34.4): **1/5**. El resultado se mantiene con dos variantes de formato (schema sin la instrucción de sí/no, y texto libre).
 
 `qwen3:8b` no conoce ni los datos más difundidos de este corpus (prórroga de la LAU, fianza del art. 36, umbral de gran tenedor). Un eval set sobre este corpus mide recuperación, no recuerdo.

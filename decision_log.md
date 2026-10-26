@@ -104,7 +104,7 @@ Repartido en las cuatro cuentas de Colab, ~2 h de T4 por cuenta. El cuello de bo
 - **Entrega por presupuesto:** 3.000 tokens del generador en todas las filas; lo que no entra se saltea y se sigue.
 - **Primaria: "clave entregada desde el gold"**, con equivalencia por texto entre versiones idénticas. *answer-delivered* suelto se descartó como primaria: en 29 de 78 preguntas la clave está en 50 secciones o más.
 - **Mejor configuración:** la de más aciertos en test; si una fila con menos piezas no se distingue de ella (signos, p ≥ 0,05), gana la de menos piezas.
-- **En local, torch con CUDA y bge-m3 en fp32.** torch con CUDA se instala a mano en el `.venv` (no va a `requirements*.txt`: Colab trae el suyo). En la GTX 1660, sin tensor cores, fp16 procesaba 3,0 textos/s y fp32 14,2; en Colab, fp16. El dtype va en la clave de la matriz, así no se mezclan.
+- **En local, torch con CUDA y bge-m3 en fp32.** torch con CUDA se instala a mano en el `.venv` (no va a `requirements*.txt`: Colab trae el suyo). La regla (fp16 solo en Colab) se fijó midiendo en la máquina de desarrollo, una GTX 1660 Super sin tensor cores, donde fp16 procesaba 3,0 textos/s y fp32 14,2. La corrida completa fue en otra máquina, una RTX 5070 Laptop, que sí tiene tensor cores: ahí la regla también dio fp32 (22 min de embeddings), mientras que en Colab da fp16. Una corrida en Colab no reproduciría los embeddings bit a bit, y por eso el dtype va en la clave de la matriz.
 - **Resultado:** ninguna pieza supera p = 0,05. El prefijo se acerca (7-1). La mejor configuración es **`+prefix`**.
 
 ### Etapa 4 · Respuestas fundamentadas
@@ -194,3 +194,44 @@ La adopción del repo del curso no lo tocó (verificado contra los hashes).
 - **Qué cuesta:** nada de lo construido con la foto vieja (índices, embeddings, cachés) se reusa, porque el `corpus_sha` cambió.
 
 **El congelado nuevo:** `dialogues.jsonl` = `13f7c449…` (los otros dos archivos sin cambios), `corpus_sha` = `b01a2c0acc3508873861365d25b37d28ea0a8dacf7f868834ddb5207e28b526d`, **key = `99676007c42e6f6e`**, que va en el `run_spec` de cada fila de resultados.
+
+---
+
+## 6 · Revisión posterior a la entrega (2026-10-26)
+
+Una revisión del trabajo entregado encontró siete puntos en los que el informe se apoyaba en algo que no se midió, o que se midió con un instrumento que no correspondía. Ninguno cambia el eval set congelado, la configuración elegida ni las filas guardadas de las Etapas 3-7.
+
+### Lo que se encontró
+
+1. **Las auditorías las hizo un modelo, no una persona.** `07_second_read` lo dice en una línea ("un auditor que también es un modelo, aunque más grande y de otra familia"), pero el informe hablaba de "el auditor" sin decirlo, y la columna `auditor` de las planillas del juez y de la memoria remitía al informe. La consigna pide auditar a mano. Es la falla más importante: la calibración de los jueces, la tasa de registros de memoria mal guardados y, con ella, la afirmación de que la contención es una cota inferior, son hoy la lectura de un modelo.
+2. **La configuración elegida entrega versiones que no rigen.** `+prefix` busca entre todas las versiones; contado con las filas guardadas de la Etapa 3 (por id de sección), entrega otras versiones del artículo gold en 6 de las 7 preguntas `metadata` de test, y `+date`, en ninguna. El informe atribuía md02 y md05 solo al razonamiento temporal del generador ("recuperar la versión correcta no alcanza") sin haber corrido nunca la Etapa 4 con el filtro.
+3. **La mejor fila se eligió sobre `test`.** Lo decía la notebook 03, no el informe.
+4. **Etapa 5B con denominadores distintos** (41 y 42, por los errores de dl04.t4). Sobre los 41 turnos comunes ningún conteo cambia.
+5. **El resumen se congela en su tope**: "no paga su costo" era una conclusión sobre ese resumidor, no sobre la estrategia.
+6. **Etapa 6 sin poder.** Con 3 escenarios de test, el mejor resultado posible es 3-0 (p = 0,25): ninguna comparación podía superar el ruido.
+7. **Los recortes no se revisaron con el presupuesto real** (1,5 h de GPU contra 7-8 estimadas): la posición del pasaje entraba de sobra.
+
+### Lo que se hizo sin LLM
+
+- El informe dice cada una de estas cosas en su sección (y en la nueva sección 11).
+- `tools/recompute_tables.py`: recalcula las tablas desde el zip, sin el corpus y con la biblioteca estándar. Reproduce las tablas principales del informe (aciertos, comparaciones, calibración); sus reglas de puntaje están verificadas contra las del proyecto (`tests/test_recompute_tables.py`).
+- `tools/make_human_audits.py` y `AUDITORIA_HUMANA.md`: las cuatro planillas ciegas para una persona (82 juicios, 76 registros, 25 resúmenes, 20 reescrituras), con las mismas filas y sin lo que dijo el modelo.
+
+### La Etapa 8, pre-registrada (antes de correrla)
+
+`08_followups.py`. Reglas, fijadas antes de cualquier resultado:
+- **No cambia nada de lo anterior.** La mejor fila sigue siendo `+prefix` para las Etapas 4-7, el eval set sigue congelado (`99676007c42e6f6e`), y lo nuevo va a archivos nuevos (`results/08_*.jsonl`, `results/03_retrieval_metrics.jsonl`).
+- **Antes de generar, el pipeline tiene que reproducir lo guardado:** la recuperación `+prefix` de las 40 preguntas, las entregas de `retrieval` y `oracle` de la Etapa 4, la recuperación `last_turn` de los 49 turnos y las entregas de `window_h150` de la Etapa 5, unidad por unidad y con la misma cuenta de tokens. Si algo no coincide, la etapa se corta.
+- **Cada brazo nuevo cambia una cosa** contra un brazo guardado, con el mismo prompt, `num_ctx = 8.192`, `num_predict = 768`, temperatura 0, orden fijo y el modelo descargado al empezar cada brazo:
+  - `retrieval_date` contra `retrieval`: `+prefix+date` en lugar de `+prefix`, con el mismo presupuesto de 3.000 tokens;
+  - `oracle_padded` contra `oracle`: los padres gold y, después, distractores (lo que recupera `+prefix`, sin el gold) hasta 3.000 tokens;
+  - posición: el padre gold primero, en el medio o último entre los mismos distractores, hasta 6.000 tokens, sobre las 26 preguntas con respuesta de test;
+  - `summary_v2_h150` contra `summary_h150` y contra `window_h150`: el mismo tope de 150 tokens de historial y otro resumidor (gramática hasta 600 caracteres, para que no corte; un prompt que pide reescribir juntando lo anterior con lo nuevo, nunca copiar, y sacar primero lo respondido en turnos viejos). Corre primero en los 2 guiones de `dev` como chequeo, sin ajustar nada, y después en los 8 de test.
+- **La regla de la mejor fila** se aplica también en `dev` (8 preguntas con respuesta) y en 2.000 remuestreos bootstrap de `test`, con semilla. Se reporta; no cambia la configuración.
+- **Cómo se lee:** sobre `test`; por ítem en la Etapa 4 y en la posición, por guion en la 5B. p < 0,05 en el test de signos es un efecto; si no, una dirección. Para la posición, dicho antes: hacen falta 6 discordantes del mismo lado para p < 0,05, y un nulo con ~6.000 tokens no refuta *Lost in the Middle*.
+- **Costo estimado:** ~280 llamadas, unos 10 minutos en la RTX 5070.
+
+### Lo que queda pendiente
+
+- **Correr la Etapa 8** en la máquina con el índice y la GPU, y agregar sus resultados al informe.
+- **La auditoría humana** de las cuatro planillas (unas 3 horas). La del juez es la que pide la consigna.

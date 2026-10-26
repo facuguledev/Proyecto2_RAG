@@ -306,11 +306,11 @@ if audited:
 
 # %% [markdown]
 r"""
-**Lectura de la calibración** (82 juicios, auditados sin ver los veredictos).
+**Lectura de la calibración** (82 juicios, auditados sin ver los veredictos). **El auditor es un modelo de lenguaje, no una persona**, y la consigna pide una persona: esta tabla dice qué instrumento se parece más a ese auditor, no cuál tiene razón.
 - **La contención es el instrumento más cercano al auditor:** coincide en 73 de 82 (0,90 reponderado). Nunca acepta una respuesta que el auditor rechaza (0). Sus 9 desacuerdos son respuestas correctas con otras palabras ("al día en el pago" por "al corriente"). Es conservadora: sus números de las Etapas 4-6 son una cota inferior.
 - **`qwen3:8b` como juez es demasiado severo:** coincide en 42 de 82 (0,75 reponderado), y rechaza 36 respuestas que el auditor acepta, contra 4 al revés. La autopreferencia que se esperaba no aparece. El juez de la misma familia es el que más castiga a su generador.
 - **`granite3.3:8b` queda en el medio:** coincide en 69 de 82 (0,86 reponderado), con 8 respuestas que acepta y el auditor no, y 5 al revés.
-- **Qué se puede leer, entonces.** Ningún juez mejora a la contención como vara de este eval set. Para las respuestas abiertas, el juez de otra familia es mejor que el de la misma, y los dos difieren entre sí más que cualquier brazo de cualquier etapa. Todo esto es contra un auditor que también es un modelo, aunque más grande y de otra familia.
+- **Qué se puede leer, entonces.** Ningún juez mejora a la contención como vara de este eval set. Para las respuestas abiertas, el juez de otra familia es mejor que el de la misma, y los dos difieren entre sí más que cualquier brazo de cualquier etapa. Todo esto es contra un auditor que también es un modelo, aunque más grande y de otra familia. La planilla ciega para que una persona rehaga la auditoría la escribe la Etapa 8 (`judge_human/audit.csv`), que recalcula esta tabla contra ella.
 """
 
 # %% [markdown]
@@ -336,7 +336,7 @@ else:
 r"""
 ## Para el informe
 
-- **¿Dónde el juez no coincidió con la contención y con la auditoría, y en cuál se confía?** Con la contención, sobre todo en las preguntas con respuesta (33 contra 1) y en las preferencias. Con la auditoría, `qwen3:8b` rechaza 36 respuestas correctas. La contención es la más cercana al auditor (73/82, sin aceptar nunca una incorrecta): las tablas de las Etapas 4-6 se leen con ella, y son una cota inferior.
+- **¿Dónde el juez no coincidió con la contención y con la auditoría, y en cuál se confía?** Con la contención, sobre todo en las preguntas con respuesta (33 contra 1) y en las preferencias. Con la auditoría, `qwen3:8b` rechaza 36 respuestas correctas. La contención es la más cercana al auditor-modelo (73/82, sin aceptar nunca una incorrecta): las tablas de las Etapas 4-6 se leen con ella, y serían una cota inferior si una persona confirma la auditoría.
 - **¿Cuánto importa la autopreferencia, y cómo se sabe?** Con dos jueces de familias distintas: el de la misma familia no es indulgente, sino el más estricto. El otro juez es mucho más indulgente que los dos. Que la diferencia entre jueces sea más grande que cualquier efecto de las etapas es en sí un resultado.
 """
 

@@ -10,7 +10,7 @@
    - lo que pregunta alguien que alquila, que es dueño de un piso o que vive en una comunidad de vecinos.
 2. **Por tema, se escribe la pregunta**, como la diría un usuario en España (piso, casero, fianza, comunidad), y la **respuesta esperada**. Las dos cosas van antes de buscar en el corpus.
 3. **Recién después se busca el gold** y se verifica la respuesta contra el texto. La clave de respuesta se copia del texto gold, y la pregunta no. Si el corpus dice otra cosa que la esperada, cambia la clave, nunca la redacción.
-4. **Chequeo de contaminación y BM25** (`notebooks/02_eval.ipynb`). Lo marcado se reescribe **desde el tema**, no desde el pasaje.
+4. **Chequeo de contaminación y BM25** (`02_eval_set.ipynb`). Lo marcado se reescribe **desde el tema**, no desde el pasaje.
 
 Hay dos excepciones al paso 2:
 - Las preguntas de **identificador** no se escriben: se derivan con `evalset.derive_identifier_items`.
